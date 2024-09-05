@@ -15,7 +15,7 @@ level: 1
 
 # Lecture 1
 
-## 主讲人: Vollate
+## 主讲人: 黄梓通
 
 ---
 level: 1
@@ -47,15 +47,95 @@ RoboMaster 机甲大师超级对抗赛（RMUC, RoboMaster University Championshi
 <img src="./img/types.png" width="570">
 </div>
 
+
+--- 
+layout: iframe
+url: https://www.bilibili.com/video/BV1ai421X7U6?p=57&vd_source=8230816b827a6144796db49afdcbacaa
+--- 
+
+**比赛回放：上海交通大学 vs 广东工业大学**
+
+---
+layout: cover
+---
+
+# 视觉/算法组工作内容
+
+--- 
+layout: default
+---
+
+**自动瞄准系统**
+
+<video width="600" controls>
+  <source src="./Video/auto_aim.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+--- 
+layout: default
+--- 
+
+**能量机关激活**
+
+--- 
+layout: default
+--- 
+
+**雷达站**
+
+--- 
+layout: default
+--- 
+
+**导航系统**
+
+---
+layout: two-cols-header
+---
+
+# 培训安排
+视觉/算法组培训安排
+
+视觉/算法组培训为课程+项目的制度，从9月持续到11月，共计八周。课程安排为每周两天，每天1-2小时课程时间，加上每周3-5h的作业量。
+
+前4周以授课+课后作业的形式为主，后4周以预研项目为主。
+
+::left::
+## Part 1 课程
+1. linux/git 简介，环境配置（1周）
+2. C/C++ 基础（2周）
+3. 视觉/导航算法基础（1周）
+4. 代码讲解（1周）
+<br><br>
+
+::right::
+## Part 2 预研项目
+- [2025赛季预研项目](https://heavy-trampoline-037.notion.site/679f70dcd4234c41bc805b2eee3b41eb?pvs=4)
+
+---
+layout: cover
+---
+
+# Lecture 1: Intro to Computer
+
+--- 
+layout: default
+---
+
+# TODO
+
+--- 
+layout: cover
+---
+
+# Lecture 2: C/C++ (1)
+
 ---
 layout: two-cols-header
 ---
 
 ## WSL 的安装与使用
-
-
-
-
 
 ### 什么是 WSL
 
