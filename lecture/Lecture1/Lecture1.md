@@ -21,17 +21,31 @@ level: 1
 level: 1
 ---
 
-## TOC
+## 目录
 
 <Toc minDepth="2" maxDepth="4"></Toc>
 
+
 ---
-layout: image-right
-image: image/visual-logo.png
-backgroundSize:  60%
+layout: cover
+background: img/field.png
 ---
 
-## 视觉算法组工作介绍
+# RoboMaster赛事介绍
+---
+layout: default
+---
+
+**RoboMaster赛事介绍**
+
+RoboMaster 机甲大师超级对抗赛（RMUC, RoboMaster University Championship），侧重考察参赛队员对理工学科的综合应用与工程实践能力，充分融合了“机器视觉”、“嵌入式系统设计”、“机械控制”、“自主导航”、“人机交互”等众多机器人相关技术学科，同时创新性的将电竞呈现方式与机器人竞技相结合，使机器人对抗更加直观
+
+**规则介绍**
+
+在2024赛季中，对战双方需自主研发不同种类和功能的机器人，在指定的比赛场地内进行战术对抗，通过操控机器人发射弹丸攻击对方机器人和基地。比赛结束时，基地剩余血量高的一方获得比赛胜利。
+<div align="center">
+<img src="./img/types.png" width="570">
+</div>
 
 ---
 layout: two-cols-header
@@ -39,11 +53,13 @@ layout: two-cols-header
 
 ## WSL 的安装与使用
 
-::left::
+
+
+
 
 ### 什么是 WSL
 
-Windows Subsystem for Linux (WSL) 是一个能够在 Windows 上运行原生 Linux 二进制可执行文件的兼容层，我们使用它来进行教学，可以在不使用双系统或虚拟机的情况下，以较好的性能运行一个 Linux 环境。
+Windows Subsystem for Linux (WSL) 是一个能够在 Windows 上运行原生 Linux，安装简便。我们使用它来进行教学，可以在不使用双系统或虚拟机的情况下，以较好的性能运行一个 Linux 环境。
 
 <img src="https://learn.microsoft.com/en-us/windows/images/wsl-icon.png" alt="WSL Logo" style="display: block; margin-left: auto; margin-right: auto; width: 200px;"/>
 
@@ -84,6 +100,7 @@ sudo apt install build-essential cmake git # 安装基本的开发工具
 <<< @/code/helloworld.cpp {*}{lines: true}
 
 ---
+
 
 ---
 
