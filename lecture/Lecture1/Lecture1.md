@@ -56,6 +56,27 @@ url: https://www.bilibili.com/video/BV1ai421X7U6?p=57&vd_source=8230816b827a6144
 **比赛回放：上海交通大学 vs 广东工业大学**
 
 ---
+layout: two-cols-header
+---
+
+# 赛制
+RoboMaster赛制
+
+RoboMaster 机甲大师赛分为三个比赛：**1v1步兵对抗赛**, **高校联盟赛**和**超级对抗赛**。
+步兵对抗赛规模较小，通常与高校联盟赛同时举行。我们主要介绍高校联盟赛与超级对抗赛。
+::left::
+## 高校联盟赛
+- 清明节前后
+- 出差3天
+- 3v3平面地图对抗
+::right::
+## 超级对抗赛
+- 分区赛（期末周前）
+- 复活赛&全国赛（八月初）
+- 在分区赛获得赛区前16强的队伍，将**有机会**参加复活赛。分区赛获得前8强的队伍，有资格参加全国赛。
+
+
+---
 layout: cover
 ---
 
@@ -146,7 +167,7 @@ layout: default
 layout: cover
 ---
 
-# Lecture 2: C/C++ (1)
+# Lecture 2: Intro to Computer (2)
 
 ---
 layout: two-cols-header
@@ -189,12 +210,6 @@ sudo apt update # 更新软件源
 sudo apt upgrade # 升级已安装的软件
 sudo apt install build-essential cmake git # 安装基本的开发工具
 ```
-
----
-
-## 开始一个简单的 C++ 程序
-
-<<< @/code/helloworld.cpp {*}{lines: true}
 
 ---
 
