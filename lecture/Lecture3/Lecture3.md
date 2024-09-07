@@ -3,7 +3,7 @@ theme: default
 colorSchema: auto
 routerMode: history
 favicon: 'https://cdn.jsdelivr.net/gh/slidevjs/slidev/assets/favicon.png'
-title: ARTINX 2025 视觉算法组培训
+title: ARTINX 2025 视觉算法组培训 Lecture 2
 info: ARTINX Visual 2025
 class: text-center
 drawings:
@@ -113,7 +113,7 @@ C++11 引入了定长整型，如 `int8_t, uint8_t, int16_t, uint16_t` 等，确
 - 正无穷、负无穷: $\infty, -\infty$
 - NaN(Not a Number): 0/0, $\infty/\infty$ 等情况
 
-```cpp 
+```cpp
 std::numeric_limits<double>::infinity();
 std::numeric_limits<double>::quiet_NaN();
 std::numeric_limits<double>::signaling_NaN();
@@ -213,7 +213,7 @@ char e[] = "Hello, World!"; // 字符串型字面量
 
 ---
 
-### 指针和引用
+## 指针和引用
 指针(pointer)是一个存储变量地址的变量，可以通过指针访问变量的值。引用(reference)是一个变量的别名，可以通过引用访问变量的值。
 std::nullptr_t 是一个空指针类型，用于表示空指针。
 
@@ -236,9 +236,9 @@ r = 12; // 通过引用访问变量
 
 ---
 
-### 复合数据类型
+## 复合数据类型
 
-#### 数组
+### 数组
 
 数组是一种存储相同类型数据的集合，数组的大小在声明时就确定，且不可改变。数组的元素可以通过下标访问，下标从 0 开始。
 
@@ -264,7 +264,6 @@ layout: two-cols
 8. try 块<br/>
 </div>
 
-
 ::right::
 
 ```cpp
@@ -274,4 +273,3 @@ layout: two-cols
     std::cout << a << std::endl;
 }
 ```
-
