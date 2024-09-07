@@ -78,11 +78,29 @@ layout: default
 
 **能量机关激活**
 
+<video width="800" controls>
+  <source src="./Video/buff_active.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 --- 
-layout: default
+layout: two-cols
 --- 
 
 **雷达站**
+<br><br><br>
+
+![识别情况](./img/radar2.png)
+
+**机器人识别**
+
+::right::
+
+<br><br><br>
+
+![操作手UI](./img/radar1.png)
+
+**操作手UI**
 
 --- 
 layout: default
@@ -117,8 +135,7 @@ layout: two-cols-header
 layout: cover
 ---
 
-# Lecture 1: Intro to Computer
-
+# Lecture 1: Intro to Computer (1)
 --- 
 layout: default
 ---
