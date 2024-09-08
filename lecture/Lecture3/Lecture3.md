@@ -3,7 +3,7 @@ theme: default
 colorSchema: auto
 routerMode: history
 favicon: 'https://cdn.jsdelivr.net/gh/slidevjs/slidev/assets/favicon.png'
-title: ARTINX 2025 视觉算法组培训 Lecture 2
+title: ARTINX 2025 视觉算法组培训 Lecture 3
 info: ARTINX Visual 2025
 class: text-center
 drawings:
@@ -13,7 +13,7 @@ mdc: true
 level: 1
 ---
 
-# Lecture 2
+# Lecture 3
 
 ---
 level: 1
@@ -54,9 +54,32 @@ g++ hello_world.cpp -o hello_world
 ```
 
 ### 关键字&标识符
+
 关键字是 C++ 中具有特殊含义的保留字，它们用于表示语言的语法结构和控制指令，例如 `int, if, for, return` 等。由于关键字已经被语言定义，不能用作变量名、函数名或其他标识符。
 
 标识符是程序员为变量、函数、类、对象等实体自定义的名称。标识符必须遵循一定的规则，如以字母或下划线开头，不能与关键字冲突，并且在命名时最好具有语义性，以便提高代码的可读性和可维护性。
+
+---
+
+## 声明和定义
+
+- **声明**是指告诉编译器某个变量、函数或类的存在。
+- **定义**是指指定函数或变量的具体实现，或者为变量分配内存空间。
+
+```cpp
+extern int a; // declaration
+int a = 10; // definition
+
+void foo(); // declaration
+void foo() { // definition
+    // function body
+}
+
+class A; // declaration
+class A { // definition
+    // class body
+};
+```
 
 ---
 
@@ -64,7 +87,10 @@ g++ hello_world.cpp -o hello_world
 
 C++ 中的基本数据类型包括整型、浮点型、字符型、布尔型等。
 
+---
+
 ### 整型
+
 | 类型       | 关键字     | 字节数 | 取值范围                                |
 |------------|------------|--------|-----------------------------------------|
 | bool       | bool       | 1      | true/false                              |
@@ -177,10 +203,13 @@ int main() {
 - `static_cast` 不能用于无关类型之间的转换，如 `int` 转 `char`, 这时可以使用 `reinterpret_cast`进行二进制数据的直接转换。可能因为内存对齐问题导致未定义行为
 - C-style cast 会忽略任何检查
 
+
 ---
 
-### 常量和字面量
+## 常量和字面量
+
 - 常量是指在程序运行过程中其值不会发生变化的量，使用 `const` 关键字进行声明，以保证其值不会被修改。该保护仅为编译期保护。
+
 ```cpp
 constexpr int x = 10;
 constexpr int y = 10;
@@ -203,16 +232,6 @@ char e[] = "Hello, World!"; // 字符串型字面量
 
 ---
 
-#### 字符串字面量
-字符串字面量是由双引号括起来的字符序列，如 `"Hello, World!"`。字符串字面量是一个字符数组，以空字符 `\0` 结尾，表示字符串的结束。
-- 常见的字符串编码方式有 ASCII 编码、UTF-8 编码、UTF-16 编码等。
-- **转义字符**是指在字符串中以反斜杠 `\` 开头的字符，用于表示一些特殊字符，如 `\n` 表示换行符，`\t` 表示制表符等。要表示反斜杠本身，需要使用 `\\`。
-- **原始字符串字面量**是指以 `R"()"` 包裹的字符串字面量，不会对转义字符进行转义，如 `R"(Hello, \n World!)"`。
-
-为了支持 Unicode 字符串，C++11 引入了 `u8` 前缀，表示字符串使用 UTF-8 编码，如 `u8"你好，世界!"`，同时 wchar_t 类型也被引入，用于表示宽字符。
-
----
-
 ## 指针和引用
 指针(pointer)是一个存储变量地址的变量，可以通过指针访问变量的值。引用(reference)是一个变量的别名，可以通过引用访问变量的值。
 std::nullptr_t 是一个空指针类型，用于表示空指针。
@@ -231,9 +250,21 @@ r = 12; // 通过引用访问变量
 - 指针加减整数：指针加减整数会根据指针类型的大小进行移动`sizeof(type)`
 
 指针和引用的区别：
-- 指针可以被重新赋值，引用不能
+- 指针可以被重新赋值，引用不能（指向新的对象）
 - 指针可以为空，引用不能
 
+---
+
+### 字符串字面量
+字符串字面量是由双引号括起来的字符序列，如 `"Hello, World!"`。字符串字面量是一个字符数组，以空字符 `\0` 结尾，表示字符串的结束。
+- 常见的字符串编码方式有 ASCII 编码、UTF-8 编码、UTF-16 编码等。
+- **转义字符**是指在字符串中以反斜杠 `\` 开头的字符，用于表示一些特殊字符，如 `\n` 表示换行符，`\t` 表示制表符等。要表示反斜杠本身，需要使用 `\\`。
+- **原始字符串字面量**是指以 `R"()"` 包裹的字符串字面量，不会对转义字符进行转义，如 `R"(Hello, \n World!)"`。
+
+为了支持 Unicode 字符串，C++11 引入了 `u8` 前缀，表示字符串使用 UTF-8 编码，如 `u8"你好，世界!"`，同时 wchar_t 类型也被引入，用于表示宽字符。
+
+---
+layout: two-cols
 ---
 
 ## 复合数据类型
@@ -241,6 +272,121 @@ r = 12; // 通过引用访问变量
 ### 数组
 
 数组是一种存储相同类型数据的集合，数组的大小在声明时就确定，且不可改变。数组的元素可以通过下标访问，下标从 0 开始。
+
+```cpp
+int arr[5] = {1, 2, 3, 4, 5}; // 初始化数组
+int arr[5]; // 定义数组
+int arr[] = {1, 2, 3, 4, 5}; // 自动计算数组大小
+int arr[5] = {1, 2}; // 部分初始化, 结果为 {1, 2, 0, 0, 0}
+
+arr[0] = 10; // 访问并修改数组元素
+*(arr + 1) = 20; // 指针访问数组元素
+```
+
+Reference: 
+- https://en.cppreference.com/w/c/language/array
+- https://en.cppreference.com/w/c/language/array_initialization
+
+::right::
+
+### 数组退化
+在函数参数传递中，数组会退化为指针，因此在函数参数中声明数组时，实际上是声明了一个指针。
+
+```cpp
+# include <iostream>
+
+// void foo(int *args)
+// void foo(int args[5])
+void foo(int args[]) {
+  // args 退化为指针
+  static_assert(sizeof(args) == sizeof(int*), "Error"); 
+  std::cout << sizeof(args) << std::endl; // 8
+}
+
+int main() {
+  int arr[5] = {1, 2, 3, 4, 5};
+  std::cout << sizeof(arr) << std::endl; // 20
+  foo(arr);
+  return 0;
+}
+```
+
+---
+
+### 结构体(C struct)
+
+结构体是一种用户自定义的数据类型，用于存储不同类型的数据。结构体的成员可以是基本数据类型、数组、指针、结构体等。
+
+```cpp
+struct Student {
+    int id;
+    char name[20];
+    float score;
+};
+
+struct Class {
+    int id;
+    Student students[30];
+};
+
+struct Student s = {1, "Alice", 90.5};
+struct Student t = {.id = 1, .name = "Alice", .score = 90.5};
+struct Class c = {1, {s, t}};
+
+// access struct member
+std::cout << s.id << s.student[0].name << std::endl;
+```
+
+---
+
+### Union(联合体或共用体)
+
+联合体是一种特殊的结构体，所有成员共用同一块内存空间，只能同时存储一个成员的值。Union 的大小等于最大成员的大小。
+
+```cpp
+Union U {
+    int a;
+    double b;
+};
+
+size_t size = sizeof(U); // 8
+
+U u;
+u.a = 10;
+std::cout << u.a << std::endl; // 10
+u.b = 3.14;
+std::cout << u.b << std::endl; // 3.14
+```
+
+C++17 引入了 `std::variant` 类型，用于替代 Union，提供了更好的类型安全性和异常处理。
+
+---
+
+### enum(枚举)
+
+枚丿是一种用户自定义的数据类型，用于定义一组具名整型常量。枚举类型的值可以通过枚举常量名访问。本质上枚举类型是整型类型。
+
+```cpp
+#include <iostream>
+int main() {
+  enum Color {
+      RED,
+      GREEN,
+      BLUE
+  };
+
+  enum Weather {
+      SUNNY = 10,
+      RAINY = 20,
+      CLOUDY = 30
+  };
+
+  Color c = RED;
+  Weather w = SUNNY;
+
+  std::cout << c << '\n' << w << std::endl;
+}
+```
 
 ---
 layout: two-cols
