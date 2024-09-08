@@ -75,7 +75,11 @@ image: ./img/binary.png
 layout: default
 ---
 
-## 编程语言
+## 汇编语言 与 指令集
+
+**汇编语言**
+
+- 一种低级语言，能够直接与二进制指令对应
 
 ---
 layout: default
