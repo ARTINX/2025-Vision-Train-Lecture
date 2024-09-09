@@ -13,7 +13,7 @@ mdc: true
 level: 1
 ---
 
-# Lecture 1
+# Lecture 0
 
 ## 主讲人: 黄梓通
 
@@ -128,6 +128,11 @@ layout: default
 
 **导航系统**
 
+<video width="800" controls>
+  <source src="./Video/nav.mov" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 ---
 layout: two-cols-header
 ---
@@ -151,8 +156,3 @@ layout: two-cols-header
 ## Part 2 预研项目
 - [2025赛季预研项目](https://heavy-trampoline-037.notion.site/679f70dcd4234c41bc805b2eee3b41eb?pvs=4)
 
----
-layout: cover
----
-
-# 写在最后
