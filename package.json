@@ -1,0 +1,21 @@
+{
+  "name": "2025-visual-train-lecture",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "slidev build",
+    "dev": "slidev --open",
+    "export": "slidev export",
+    "help": "slidev --help"
+  },
+  "dependencies": {
+    "@slidev/cli": "^0.49.29",
+    "@slidev/theme-default": "latest",
+    "@slidev/theme-seriph": "latest",
+    "slidev-theme-soba": "^0.2.3",
+    "vue": "^3.4.38"
+  },
+  "devDependencies": {
+    "playwright-chromium": "^1.47.0"
+  }
+}
