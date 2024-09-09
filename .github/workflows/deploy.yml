@@ -21,6 +21,10 @@ jobs:
         with:
           version: 8
 
+      - name: Install Chinese fonts
+        run: |
+            sudo apt-get install -y fonts-noto-cjk
+            
       - name: Use Node.js 20.x
         uses: actions/setup-node@v4
         with:
@@ -33,7 +37,7 @@ jobs:
       - name: Build
         run: |
           rm -rf public
-          rm *.pdf
+          rm -f *.pdf
           node script/build.cjs
 
       - name: Deploy
