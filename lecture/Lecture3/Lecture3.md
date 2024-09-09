@@ -21,7 +21,7 @@ level: 1
 
 ## TOC
 
-<Toc minDepth="2" maxDepth="3"></Toc>
+<Toc minDepth="2" maxDepth="2"></Toc>
 
 ---
 
@@ -87,6 +87,14 @@ class A { // definition
 
 C++ 中的基本数据类型包括整型、浮点型、字符型、布尔型等。
 
+运行时，数据以二进制形式存储在内存中，不同的数据类型占用不同的内存空间，有不同的取值范围和精度。
+
+不同的 CPU 架构存储数据的方式不同，分为大端序和小端序。大端序是指高位字节存储在低地址，小端序是指高位字节存储在高地址。
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/32bit-Endianess.svg/2880px-32bit-Endianess.svg.png" width="500"  style="display: block; margin-left: auto; margin-right: auto;background-color: white;"/>
+<br/>
+
+> Image Citation: https://en.wikipedia.org/wiki/Endianness
 ---
 
 ### 整型
@@ -364,7 +372,7 @@ C++17 引入了 `std::variant` 类型，用于替代 Union，提供了更好的�
 
 ### enum(枚举)
 
-枚丿是一种用户自定义的数据类型，用于定义一组具名整型常量。枚举类型的值可以通过枚举常量名访问。本质上枚举类型是整型类型。
+枚举是一种用户自定义的数据类型，用于定义一组具名整型常量。枚举类型的值可以通过枚举常量名访问。本质上枚举类型是整型类型，可以通过 static_cast 进行转换。
 
 ```cpp
 #include <iostream>
@@ -388,6 +396,71 @@ int main() {
 }
 ```
 
+由于 C 语言中的枚举类型是全局的，容易引起命名冲突，C++11 引入了枚举类(enum class)，用于解决这个问题。
+
+---
+
+## Control Flow
+
+### 选择语句
+
+#### if 语句
+  
+```cpp
+if (condition) {
+    // code block
+} else if (condition) {
+    // code block
+} else {
+    // code block
+}
+```
+
+#### switch 语句
+
+```cpp
+switch (expression) {
+    case constant1:
+        // code block
+        break;
+    case constant2:
+        // code block
+        break;
+    default:
+        // code block
+}
+```
+
+---
+
+### 循环语句
+
+#### while 语句
+
+```cpp
+while (condition) 
+  // statement
+
+do {
+    // code block
+} while (condition);
+```
+
+#### for 语句
+
+```cpp
+
+for (int i = 0; i < 10; i++)
+  // statement
+
+int b = 10;
+for (; b > 0; b--)
+  // statement
+```
+
+break 语句用于跳出循环，continue 语句用于跳过本次循环。
+
+goto: 用于无条件跳转到指定标签处，C++ 中不推荐使用。
 ---
 layout: two-cols
 ---
