@@ -36,7 +36,7 @@ background: img/field.png
 layout: two-cols-header
 ---
 
-# RoboMaster赛事介绍
+## RoboMaster赛事介绍
 <br>
 
 RoboMaster 机甲大师赛分为三个比赛：**1v1步兵对抗赛**, **高校联盟赛**和**超级对抗赛**。
@@ -140,19 +140,27 @@ layout: two-cols-header
 # 培训安排
 视觉/算法组培训安排
 
-视觉/算法组培训为课程+项目的制度，从9月持续到11月，共计八周。课程安排为每周两天，每天1-2小时课程时间，加上每周3-5h的作业量。
+视觉/算法组培训为课程+项目的制度，从9月持续到11月，共计九周。课程安排为每周两天，每天1-2小时课程时间，加上每周3-5h的作业量。
 
-前4周以授课+课后作业的形式为主，后4周以预研项目为主。
+前5周以授课+课后作业的形式为主，后4周以预研项目为主。
 
 ::left::
 ## Part 1 课程
-1. linux/git 简介，环境配置（1周）
-2. C/C++ 基础（2周）
-3. 视觉/导航算法基础（1周）
+1. linux shell简介，环境配置, git等开发工具的简单介绍（1周）
+2. C/C++ 基础（2-3周）
+3. 视觉/导航算法基础（1-2周）
 4. 代码讲解（1周）
 <br><br>
 
 ::right::
 ## Part 2 预研项目
 - [2025赛季预研项目](https://heavy-trampoline-037.notion.site/679f70dcd4234c41bc805b2eee3b41eb?pvs=4)
+
+---
+layout: default
+---
+
+<div align="center">
+<img src="./img/qq-group.jpg" width="250">
+</div>
 
