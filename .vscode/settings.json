@@ -1,8 +1,0 @@
-{
-    "slidev.include": [
-        "**/slides.md",
-        "lecture/Week1/Lecture1.md",
-        "lecture/Week1/Lecture0.md"
-    ],
-    "slidev.port": 3031
-}
