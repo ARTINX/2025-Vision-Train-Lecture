@@ -233,7 +233,7 @@ const int a = 10;
 a = 20; // Error
 ```
 
-- 字面量是指在程序中直接出现的常量值，如 `10, 3.14, 'a'` 等。C++ 中的字面量包括整型、浮点型、字符型、字符串型、布尔型等。
+- 字面量(literal)是指在程序中直接出现的常量值，如 `10, 3.14, 'a'` 等。C++ 中的字面量包括整型、浮点型、字符型、字符串型、布尔型等。
 
 ```cpp
 int a = 10; // 整型字面量
@@ -243,6 +243,24 @@ bool d = true; // 布尔型字面量
 char e[] = "Hello, World!"; // 字符串型字面量
 ```
 整形和浮点型字面量可以使用后缀 `u, l, f` 等进行修饰，以表示其类型。
+
+[Reference](https://en.cppreference.com/w/cpp/language/expressions#Literals)
+
+---
+
+### 字符串字面量
+字符串字面量是由双引号括起来的字符序列，如 `"Hello, World!"`。字符串字面量是一个字符数组，以空字符 `\0` 结尾，表示字符串的结束。
+- 常见的字符串编码方式有 ASCII 编码、UTF-8 编码、UTF-16 编码等。
+- **转义字符**是指在字符串中以反斜杠 `\` 开头的字符，用于表示一些特殊字符，如 `\n` 表示换行符，`\t` 表示制表符等。要表示反斜杠本身，需要使用 `\\`。
+- **原始字符串字面量**是指以 `R"()"` 包裹的字符串字面量，不会对转义字符进行转义，如 `R"(Hello, \n World!)"`。
+
+为了支持 Unicode 字符串，C++11 引入了 `u8` 前缀，表示字符串使用 UTF-8 编码，如 `u8"你好，世界!"`，同时 wchar_t 类型也被引入，用于表示宽字符。
+
+### User defined literals(Since C++11)
+
+C++11 开始，支持用户自定义字面量。类似一个 `consteval` 的函数。
+
+[Syntax](https://en.cppreference.com/w/cpp/language/user_literal)
 
 ---
 
@@ -266,16 +284,6 @@ r = 12; // 通过引用访问变量
 指针和引用的区别：
 - 指针可以被重新赋值，引用不能（指向新的对象）
 - 指针可以为空，引用不能
-
----
-
-### 字符串字面量
-字符串字面量是由双引号括起来的字符序列，如 `"Hello, World!"`。字符串字面量是一个字符数组，以空字符 `\0` 结尾，表示字符串的结束。
-- 常见的字符串编码方式有 ASCII 编码、UTF-8 编码、UTF-16 编码等。
-- **转义字符**是指在字符串中以反斜杠 `\` 开头的字符，用于表示一些特殊字符，如 `\n` 表示换行符，`\t` 表示制表符等。要表示反斜杠本身，需要使用 `\\`。
-- **原始字符串字面量**是指以 `R"()"` 包裹的字符串字面量，不会对转义字符进行转义，如 `R"(Hello, \n World!)"`。
-
-为了支持 Unicode 字符串，C++11 引入了 `u8` 前缀，表示字符串使用 UTF-8 编码，如 `u8"你好，世界!"`，同时 wchar_t 类型也被引入，用于表示宽字符。
 
 ---
 layout: two-cols
@@ -493,6 +501,28 @@ void foo() {
 ```
 
 ---
+
+## Expression
+
+表达式是由操作数和运算符组成的计算式，可以计算出一个值。表达式可以是常量、变量、函数调用、运算符等。
+
+```cpp
+int a = 10;
+int b = 20 + a;
+int c = a + b * 2;
+
+if(a > 10 && b < 20 || c == 30);
+a++;
+++b;
+
+int d = a > b ? a : b;
+int d, e = 2;
+a = b = c = d = e = 0;
+```
+
+[Reference](https://en.cppreference.com/w/cpp/language/expressions)
+
+---
 layout: two-cols
 ---
 
@@ -520,8 +550,8 @@ Reference: https://en.cppreference.com/w/cpp/language/statements
 
 ```cpp
 // {} 用于定义复合语句
-{
-    while(i < 10) {
+    {
+        while(i < 10) {
         switch (i % 2){
             case 0:
                 std::cout << "Even" << std::endl;
@@ -529,11 +559,12 @@ Reference: https://en.cppreference.com/w/cpp/language/statements
             case 1:
                 std::cout << "Odd" << std::endl;
                 break;
+            jump_label: // labeled statement
         }
     }
-    int n = 1;                          // declaration statement
-    n = n + 1;                          // expression statement
-    std::cout << "n = " << n << '\n';   // expression statement
-    foo();                              // expression statement
+    int n = 1;                        // declaration statement
+    n = n + 1;                        // expression statement
+    std::cout << "n = " << n << '\n'; // expression statement
+    foo();                            // expression statement
 }
 ```
