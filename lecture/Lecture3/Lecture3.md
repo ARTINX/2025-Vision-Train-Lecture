@@ -49,9 +49,10 @@ do {              \
     (a) + (b);    \
 } while(0)
 
+#define ONE 1 /*useless*/
 #undef sum
 ```
-
+  
 ---
 
 ## 函数
@@ -68,8 +69,10 @@ int     foo   (int a, int b);
 //声明时可以省略参数名。
 ```
 
+
+
 ---
 
-### 拓展
+### 拓展阅读
 
 - [Compile Phase](https://en.cppreference.com/w/cpp/language/translation_phases)

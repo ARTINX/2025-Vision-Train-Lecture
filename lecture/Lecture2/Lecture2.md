@@ -39,6 +39,7 @@ C++由Bjarne Stroustrup于1979年在C语言的基础上开发，目的是通过�
 - 向下兼容：新版本的 C++ 语言标准会向下兼容旧版本的代码
 
 ### 标准
+
 - C++98: 第一个标准化版本
 - C++03：对 C++98 的小修小补
 - C++11：引入了许多新特性，是的 C++ 更加现代化
@@ -85,6 +86,41 @@ class A; // declaration
 class A { // definition
     // class body
 };
+```
+
+---
+layout: two-cols
+---
+## Statement
+
+<div v-click>
+语句是依序执行的 C++ 程序片段,主要有以下几种：
+<div v-after>
+<span v-mark.circle.green="2">
+1. 声明语句<br/>
+2. 带标号语句<br/>
+3. 表达式语句<br/>
+4. 复合语句<br/>
+5. 选择语句<br/>
+6. 循环语句<br/>
+7. 跳转语句<br/>
+</span>
+</div>
+8. try 块<br/>
+
+Reference: https://en.cppreference.com/w/cpp/language/statements
+</div>
+
+::right::
+
+```cpp
+{                                 // {} 用于定义复合语句
+int n = 1;                        // declaration statement
+n = n + 1;                        // expression statement
+std::cout << "n = " << n << '\n'; // expression statement
+jump_label:                       // labeled statement
+foo();                            // expression statement
+}
 ```
 
 ---
@@ -190,12 +226,15 @@ double b = static_cast<double>(a); // C++ style cast
 
 整形提升：`char -> int -> long -> long long`
 原则：
+
 - 低精度类型转换为高精度类型，计算时运算符两边的类型需要相等
 - 长度小于 `int` 的整型提升为 `int`
 
 浮点数提升：`float -> double -> long double`
 原则：
-- 低精度类型转换为高精度类型，计算时运算符两边的类型需要相等，整形转化为浮点数
+
+- 低精度类型转换为高精度类型，计算时运算符两边的类型需要相等
+- 整形转化为浮点数
 
 ---
 
@@ -504,7 +543,7 @@ void foo() {
 
 ## Expression
 
-表达式是由操作数和运算符组成的计算式，可以计算出一个值。表达式可以是常量、变量、函数调用、运算符等。
+表达式是由**操作数**和**运算符** (operator) 组成的计算式，可以计算出一个值。表达式可以是常量、变量、函数调用、运算符等。
 
 ```cpp
 int a = 10;
@@ -513,58 +552,22 @@ int c = a + b * 2;
 
 if(a > 10 && b < 20 || c == 30);
 a++;
-++b;
+--b;
+a += 2;
 
 int d = a > b ? a : b;
 int d, e = 2;
 a = b = c = d = e = 0;
+
+int ary[10];
+ary[4] = 10;
+int** ptr = &ary;
+(*ptr)[4] = 10;
 ```
 
 [Reference](https://en.cppreference.com/w/cpp/language/expressions)
 
 ---
-layout: two-cols
+layout: end
 ---
-
-## Statement
-
-<div v-click>
-语句是依序执行的 C++ 程序片段,主要有以下几种：
-<div v-after>
-<span v-mark.circle.green="2">
-1. 声明语句<br/>
-2. 带标号语句<br/>
-3. 表达式语句<br/>
-4. 复合语句<br/>
-</span>
-</div>
-5. 选择语句<br/>
-6. 循环语句<br/>
-7. 跳转语句<br/>
-8. try 块<br/>
-
-Reference: https://en.cppreference.com/w/cpp/language/statements
-</div>
-
-::right::
-
-```cpp
-// {} 用于定义复合语句
-    {
-        while(i < 10) {
-        switch (i % 2){
-            case 0:
-                std::cout << "Even" << std::endl;
-                break;
-            case 1:
-                std::cout << "Odd" << std::endl;
-                break;
-            jump_label: // labeled statement
-        }
-    }
-    int n = 1;                        // declaration statement
-    n = n + 1;                        // expression statement
-    std::cout << "n = " << n << '\n'; // expression statement
-    foo();                            // expression statement
-}
-```
+# Q&A
