@@ -278,19 +278,12 @@ sudo sed -i 's@//.*archive.ubuntu.com@//mirrors.ustc.edu.cn@g' /etc/apt/sources.
 sudo sed -i 's/http:/https:/g' /etc/apt/sources.list # 使用 HTTPS 协议，防止运营商缓存劫持
 sudo apt update # 更新软件源
 sudo apt upgrade # 升级已安装的软件
-sudo apt install build-essential cmake git # 安装基本的开发工具
+sudo apt install build-essential cmake git openssh-server # 安装基本的开发工具
 ```
 
 <br></br>
 
 > 有关这些命令的含义，请自行使用搜索引擎进行查找。
-
-
---- 
-layout: cover
---- 
-
-# SSH
 
 ---
 layout: image-right
@@ -307,11 +300,70 @@ image: ./img/ssh.png
 - `scp`: 通过SSH传输文件。
 > 使用格式为`scp local_file user@hostname:remote_file`，可以从本地复制文件到远端服务器。
 
+---
+layout: cover
+---
+
+# Git 入门
+
+--- 
+layout: two-cols-header
+---
+
+# Git 简介
+
+### 版本控制
+
+> 初版 -> 修订版 -> 再修订版 -> 最后一次修订版 -> 最最后一次修订版...
+
+Git 能够很好地追踪并储存项目中每个文件的修改历史，保证随时的回溯。
+
+<br></br>
+
+### 团队协作
+
+> 这里改过，这里也改过，还有那里，还有这儿，这儿...
+>
+> ...
+>
+> 这儿也改了，不好意思刚没看见
+
+Git 能够记录所有成员对项目的每一次改动，方便随时可能发生的代码合并。
+
+---
+layout: image-right
+image: ./img/git.png
+---
+
+## 常用Git命令
+常用的Git命令包括克隆，提交，拉取，推送与加入暂存区。
+- `git clone <url>` : 从github上克隆项目
+- `git push`: 将本地的修改同步到远程
+- `git pull`: 将远程的修改同步到本地
+- `git add <file_path>`: 将某个文件的修改加入暂存区
+- `git commit -m <message>`: 将暂存区中所有修改的文件保存为一次提交(commit)
+
+---
+layout: default
+---
+
+## 提交规范
+
+良好的提交信息能极大程度优化团队合作的效率，改善自己与同事的体验。
+
+- [Angular规范](https://zj-git-guide.readthedocs.io/zh-cn/latest/message/Angular%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF%E8%A7%84%E8%8C%83/)
+
+- 提交信息清晰。提交格式: `<类型>(<作用域>): <信息>`， 例如feature(main.cpp): add one line to print "Hello World".
+- 保证每个提交只完成一项功能
+- ...
+
+
+
 --- 
 layout: cover
 ---
 
-## 编程语言如何在计算机上运行？
+# 编程语言如何在计算机上运行？
 
 ---
 layout: image-right
@@ -393,4 +445,21 @@ layout: default
 
 **链接**
 - 合并相同文件与不同文件中相关的代码，生成可执行文件
+
+---
+layout: default
+---
+
+## Hello, World!
+
+一个简单的 C++ 程序
+
+<<< @/code/helloworld.cpp {*}{lines: true}
+
+编译运行：
+
+```bash
+g++ hello_world.cpp -o hello_world
+./hello_world
+```
 
