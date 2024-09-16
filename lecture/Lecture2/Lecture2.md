@@ -88,6 +88,10 @@ class A { // definition
 };
 ```
 
+**单定义原则(ODR)**: C++ 中，单个翻译单元内的非 inline 函数/变量只能出现一次定义
+
+[Reference](https://en.cppreference.com/w/cpp/language/definition)
+
 ---
 layout: two-cols
 ---
@@ -430,26 +434,23 @@ C++17 引入了 `std::variant` 类型，用于替代 Union，提供了更好的�
 ```cpp
 #include <iostream>
 int main() {
-  enum Color {
-      RED,
-      GREEN,
-      BLUE
-  };
+  enum Color { RED, GREEN, BLUE };
 
-  enum Weather {
-      SUNNY = 10,
-      RAINY = 20,
-      CLOUDY = 30
-  };
+  enum Weather : long { SUNNY = 10, RAINY = 20, CLOUDY = 30 };
+
+  enum Unknow : int;
 
   Color c = RED;
   Weather w = SUNNY;
 
   std::cout << c << '\n' << w << std::endl;
 }
+
 ```
 
 由于 C 语言中的枚举类型是全局的，容易引起命名冲突，C++11 引入了枚举类(enum class)，用于解决这个问题。
+
+[Reference](https://en.cppreference.com/w/cpp/language/enum)
 
 ---
 
@@ -570,4 +571,5 @@ int** ptr = &ary;
 ---
 layout: end
 ---
+
 # Q&A
