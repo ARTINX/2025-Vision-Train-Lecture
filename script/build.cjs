@@ -47,7 +47,7 @@ let indexContent = `
   <title>ARTINX 2025 Vison Train Lectures</title>
 </head>
 <body>
-  <h1>Available PDFs</h1>
+  <h1>ARTINX 2025 Vison Train Lectures</h1>
   <ul>
 `;
 
