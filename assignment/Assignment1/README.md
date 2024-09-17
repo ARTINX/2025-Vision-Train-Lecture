@@ -16,44 +16,44 @@ n 维向量的常见运算包括向量加法、向量减法、点积、模长计
 ### 1. 向量加法
 向量加法是两个向量的对应分量相加，结果也是一个向量。例如，给定两个二维向量 `(x1, y1)` 和 `(x2, y2)`，它们的和为 `(x1 + x2, y1 + y2)`。对于 n 维向量，这个运算规则类似：
 
-\[
+$
 \mathbf{a} + \mathbf{b} = (a_1 + b_1, a_2 + b_2, \dots, a_n + b_n)
-\]
+$
 
 ### 2. 向量减法
 向量减法是两个向量的对应分量相减。例如，二维向量 `(x1, y1)` 和 `(x2, y2)` 的差为 `(x1 - x2, y1 - y2)`。n 维向量的减法类似：
 
-\[
+$
 \mathbf{a} - \mathbf{b} = (a_1 - b_1, a_2 - b_2, \dots, a_n - b_n)
-\]
+$
 
 ### 3. 向量点积
 向量点积是两个向量的对应分量相乘并求和，结果是一个标量。二维向量 `(x1, y1)` 和 `(x2, y2)` 的点积为 `x1 * x2 + y1 * y2`。n 维向量的点积计算公式为：
 
-\[
+$
 \mathbf{a} \cdot \mathbf{b} = a_1 \cdot b_1 + a_2 \cdot b_2 + \dots + a_n \cdot b_n
-\]
+$
 
 ### 4. 向量模长
 向量的模长（或称为向量的长度）是从原点到向量终点的距离，通常用欧几里得距离来计算。二维向量 `(x, y)` 的模长为 `sqrt(x^2 + y^2)`。n 维向量的模长计算公式为：
 
-\[
+$
 |\mathbf{a}| = \sqrt{a_1^2 + a_2^2 + \dots + a_n^2}
-\]
+$
 
 ### 5. 向量归一化
 归一化是将一个向量缩放为单位长度（即模长为 1），保留其方向。归一化的向量通常用于表示方向或单位矢量。对于向量 `a`，归一化的计算公式为：
 
-\[
+$
 \mathbf{\hat{a}} = \frac{\mathbf{a}}{|\mathbf{a}|}
-\]
+$
 
 ### 6. 向量叉乘（仅适用于三维向量）
 向量叉乘仅适用于三维向量，它返回一个垂直于两个输入向量的向量。例如，给定向量 `a = (x1, y1, z1)` 和 `b = (x2, y2, z2)`，它们的叉乘为：
 
-\[
+$
 \mathbf{a} \times \mathbf{b} = (y1 \cdot z2 - z1 \cdot y2, z1 \cdot x2 - x1 \cdot z2, x1 \cdot y2 - y1 \cdot x2)
-\]
+$
 
 叉乘在 n 维空间中没有广泛应用，但它在三维空间中用于计算法向量、扭矩等物理量。
 
@@ -67,8 +67,8 @@ n 维向量的常见运算包括向量加法、向量减法、点积、模长计
 ### 1. 数据结构
 - 定义一个结构体 `Vector` 来表示 n 维向量。结构体中包含一个指向 `float` 的指针来存储向量的各个分量，另有一个 `size_t` 类型的变量记录向量的维数。
 
-    ```c
-    typedef struct {
+    ```cpp
+    struct {
         size_t dimension;  // 向量的维数
         float* data;       // 指向存储向量分量的动态数组
     } Vector;
@@ -108,29 +108,25 @@ n 维向量的常见运算包括向量加法、向量减法、点积、模长计
 - 所有操作必须检测向量的维度是否匹配，如维度不匹配，应返回错误值或进行适当的错误处理。
 - 对零向量的归一化操作应该返回一个错误标志。
 
-### 4. 函数接口设计
-- 所有函数应以 `Vector` 结构体为参数，返回新的 `Vector` 结构体或 `float` 值。例如：
-
-    ```c
+### 4. 函数接口要求
+- 要求实现如下的接口
+    ```cpp
     Vector create_vector(size_t n);
-    void destroy_vector(Vector* v);
-    Vector add(Vector a, Vector b);
-    Vector subtract(Vector a, Vector b);
-    float dot_product(Vector a, Vector b);
-    float magnitude(Vector a);
-    int normalize(Vector* a);  // 修改传入的向量，返回状态值
-    Vector cross_product(Vector a, Vector b);  // 三维向量叉乘
-    Vector copy_vector(Vector a);  // 向量拷贝
+    void destroy_vector(Vector& v);
+    Vector add(const Vector& a, const Vector& b);
+    Vector subtract(const Vector& a, const Vector& b);
+    float dot_product(const Vector& a, const Vector& b);
+    float magnitude(const Vector& a);
+    int normalize(Vector& a);  // 修改传入的向量，返回状态值
+    Vector cross_product(const Vector& a, const Vector& b);  // 三维向量叉乘
+    Vector copy_vector(const Vector& a);  // 向量拷贝
     ```
 
 ### 5. 测试用例
-- 编写一组测试用例，验证向量加法、减法、点积、模长、归一化、叉乘和拷贝函数，确保它们在不同维度的向量上正确运行。
+- 自行编写一组测试用例，验证向量加法、减法、点积、模长、归一化、叉乘和拷贝函数，确保它们在不同维度的向量上正确运行。
 
 ### 6. 内存管理
 - 动态分配和释放内存必须正确，以防止内存泄漏。每个向量的 `data` 数组应在初始化时动态分配，并在销毁时释放。
 
----
-
-## 扩展要求（可选）
-- 支持向量的动态调整大小（如向量的扩展或缩减）。
-- 允许用户对 n 维向量进行文件读写操作。
+### 7. 提交方式
+- 发送到邮件到 12111224@mail.sustech.edu.cn，标题为 `ARTINX2025视觉Assignment1`。代码以附件提交，需要压缩为一个 zip 文件，附件名为 `姓名-学号-Assignment1.zip`
