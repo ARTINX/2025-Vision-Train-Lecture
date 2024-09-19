@@ -185,7 +185,7 @@ C++11 引入了定长整型，如 `int8_t, uint8_t, int16_t, uint16_t` 等，确
 浮点数采用[IEEE 754](https://zh.wikipedia.org/zh-cn/IEEE_754)标准存储，包括符号位、指数位和尾数位。
 
 #### 定长浮点型(Since C++23)
-从 C++23 开始，引入了定长浮点型，如 `float16_t, float32_t, float64_t` 等，确保了数据类型的字节数，保证了跨平台的兼容性 [Reference](https://en.cppreference.com/w/cpp/types/float)
+从 C++23 开始，引入了定长浮点型，如 `float16_t, float32_t, float64_t` 等，确保了数据类型的字节数，保证了跨平台的兼容性 [Reference](https://en.cppreference.com/w/cpp/types/floating-point)
 
 ---
 
@@ -317,7 +317,7 @@ int* p = &a; // 指针
 int& r = a; // 引用
 
 int* p = nullptr; // 空指针
-*a = 11; // 通过指针访问变量
+*p = 11; // 通过指针访问变量
 r = 12; // 通过引用访问变量
 ```
 

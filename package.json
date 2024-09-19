@@ -13,9 +13,9 @@
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
     "slidev-theme-soba": "^0.2.3",
-    "vue": "^3.5.4"
+    "vue": "^3.5.6"
   },
   "devDependencies": {
-    "playwright-chromium": "^1.47.0"
+    "playwright-chromium": "^1.47.1"
   }
 }
