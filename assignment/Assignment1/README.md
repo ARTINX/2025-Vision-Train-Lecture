@@ -131,4 +131,4 @@ $$
 - 动态分配和释放内存必须正确，以防止内存泄漏。每个向量的 `data` 数组应在初始化时动态分配，并在销毁时释放。
 
 ### 7. 提交方式
-- 发送到邮件到 12111224@mail.sustech.edu.cn，标题为 `ARTINX2025视觉Assignment1`。代码以附件提交，需要压缩为一个 zip 文件，附件名为 `姓名-学号-Assignment1.zip`
+- 发送到邮件到 submit@vollate.top，标题为 `ARTINX2025视觉Assignment1`。代码以附件提交，需要压缩为一个 zip 文件，附件名为 `姓名-学号-Assignment1.zip`
