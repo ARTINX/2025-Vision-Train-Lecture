@@ -414,7 +414,14 @@ auto&& res = foo();
 完成一个n维向量库: 
 - [https://github.com/ARTINX/2025-Vision-Train-Lecture/tree/main/assignment/Assignment1](https://github.com/ARTINX/2025-Vision-Train-Lecture/tree/main/assignment/Assignment1)
 
-提交方式：发送到邮件到 submit@vollate.top，标题为 `ARTINX2025视觉Assignment1`。代码以附件提交，需要压缩为一个 zip 文件，附件名为 `姓名-学号-Assignment1.zip`
+提交方式：
+
+- 发送到邮件到 <submit@vollate.top>，标题为 `ARTINX2025视觉Assignment1`
+- 代码以附件提交，需要压缩为一个 zip 文件，附件名为 `姓名-学号-Assignment1.zip`，自行替换为自己的姓名学号
+
+> 务必按照以上格式提交，否则可能正常接收
+
+<br/>
 
 ## 拓展阅读
 
