@@ -259,7 +259,7 @@ layout: two-cols
 char* name=malloc(sizeof(char)*100);
 assert(NULL!=name);
 
-int* id = new;
+int* id = new int;
 int* class_id = new int[10];
 
 free(name);
@@ -426,9 +426,10 @@ auto&& res = foo();
 ## 拓展阅读
 
 - [Compile Phase](https://en.cppreference.com/w/cpp/language/translation_phases)
+- [编译之法](http://blog.vollate.top/2023/12/08/compile-knowledge/)
 
 ---
 layout: end
----
+--- 
 
 # Q&A
