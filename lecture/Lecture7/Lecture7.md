@@ -13,7 +13,7 @@ mdc: true
 level: 1
 ---
 
-# Lecture 4
+# Lecture 5
 
 ---
 level: 1
@@ -24,13 +24,3 @@ level: 1
 <Toc minDepth="2" maxDepth="2"></Toc>
 
 ---
-
-### 面向对象编程
-
-C 语言是一种面向过程的编程语言，也就是常说的
-
----
-layout: end
----
-
-# Q&A
