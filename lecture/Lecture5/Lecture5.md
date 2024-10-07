@@ -429,3 +429,14 @@ int (*add)(int, int) = [](int a, int b) -> int {
 - C++ 中的多态是通过虚函数表（vtable）实现的。每个有虚函数的类都有自己的 vtable, 在每个类中存在一个隐藏成员 vptr 指向 vtable 的地址。
 - 调用时，通过 vptr 找到 vtable，再通过 vtable 找到对应的函数，实现多态。
 
+---
+
+## Assignment 2
+
+- [https://github.com/ARTINX/2025-Vision-Train-Lecture/tree/main/assignment/Assignment2](https://github.com/ARTINX/2025-Vision-Train-Lecture/tree/main/assignment/Assignment2)
+
+---
+layout: end
+---
+
+## Q&A
