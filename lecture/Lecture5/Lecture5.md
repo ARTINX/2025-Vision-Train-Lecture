@@ -3,7 +3,7 @@ theme: default
 colorSchema: auto
 routerMode: history
 favicon: 'https://cdn.jsdelivr.net/gh/slidevjs/slidev/assets/favicon.png'
-title: ARTINX 2025 视觉算法组培训 Lecture 4
+title: ARTINX 2025 视觉算法组培训 Lecture 5
 info: ARTINX Visual 2025
 class: text-center
 drawings:
