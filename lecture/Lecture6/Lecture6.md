@@ -181,7 +181,7 @@ template <typename A, typename B> auto sum(A a, B b) -> decltype(a + b) {
 }
 
 // 全特化
-template <> auto sum<int>(int a, int b) -> decltype(a + b) { return a + b; }
+template <> auto sum(int a, int b) -> decltype(a + b) { return a + b; }
 
 // 偏特化
 template <typename A> A sum(bool a, A b) { return 1 + b; }
@@ -291,7 +291,6 @@ int main() {
     std::this_thread::sleep_for(std::chrono::seconds(5));
     std::cout << "Thread finished" << std::endl;
   });
-  a.join();
   b.join();
   c.detach();
 }
@@ -309,6 +308,7 @@ int main() {
 ### 线程同步
 
 线程同步是多线程编程中的重要问题，多个线程访问共享资源时，需要保证线程安全。对于共享资源的访问有三种情况：
+
 - 只读访问：不需要同步，线程安全。
 - 只写访问：需要同步，保证写操作的原子性。
 - 读写访问：需要同步，保证读写操作的原子性。
