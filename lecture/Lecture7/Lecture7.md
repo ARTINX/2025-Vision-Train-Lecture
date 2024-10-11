@@ -314,7 +314,7 @@ std::cout << "耗时: " << duration.count() << " 毫秒" << std::endl;
 
 - `std::chrono::system_clock`: 系统时钟。now()函数返回系统当前时间戳
 - `std::chrono::steady_clock`: 递增时钟。now()函数返回的时间戳从一个不确定的时间点开始。
-- `std::chrono::high_resolution_clock`: 高精度时钟。linux中为`steady_clock`的别名。
+- `std::chrono::high_resolution_clock`: 高精度时钟。linux中的实现等同于`steady_clock`。
 
 ---
 
