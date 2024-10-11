@@ -265,19 +265,18 @@ if (a.has_value()) {
 表示可能不存在的值，一般用做函数的返回值
 
 ```cpp
-{
-    std::optional<int> foo()
-    {
-        if (...) {
-          return 0;
-        } else {
-          return {}; // return an empty std::optional<int>
-        }
+
+std::optional<int> foo() {
+    if (...) {
+      return 0;
+    } else {
+      return {}; // return an empty std::optional<int>
     }
-    std::optional maybe_value = foo(1, 2);
-    if (maybe_balue.has_balue()) {}
-    ...
 }
+std::optional maybe_value = foo(1, 2);
+if (maybe_balue.has_balue()) {}
+...
+
 ```
 ---
 
@@ -296,7 +295,51 @@ std::cout << "Result: " << result << std::endl;
 
 - 相比起函数指针，std::function被调用时其函数签名会被检查。
 
+--- 
 
+### std::chrono
+
+提供相比time与clock精度更高的时间戳
+
+> 时间戳： 自1970年1月1日以来的时间间隔
+
+```cpp
+auto start = std::chrono::steady_clock::now();
+...
+auto end = std::chrono::steady_clock::now();
+auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+
+std::cout << "耗时: " << duration.count() << " 毫秒" << std::endl;
+```
+
+- `std::chrono::system_clock`: 系统时钟。now()函数返回系统当前时间戳
+- `std::chrono::steady_clock`: 递增时钟。now()函数返回的时间戳从一个不确定的时间点开始。
+- `std::chrono::high_resolution_clock`: 高精度时钟。linux中为`steady_clock`的别名。
+
+---
+
+### 随机数
+
+C++提供一系列用来生成随机数的函数
+
+- 随机种子：提供固定顺序的随机数生成方式，以保证多次运行的结果一致。
+
+- Example
+
+```cpp
+std::random_device rd;
+std::mt19937 gen(rd());  // 随机数引擎
+
+// 使用随机种子
+// unsigned int seed = 42;
+// std::mt19937 gen(seed);  
+
+std::uniform_int_distribution<> intDist(1, 100); // 均匀分布随机
+int randomInt = intDist(gen);
+
+std::normal_distribution<> realDist(0.0, 1.0); // 正态分布随机
+double randomReal = realDist(gen);
+```
 
 ---
 layout: iframe 
