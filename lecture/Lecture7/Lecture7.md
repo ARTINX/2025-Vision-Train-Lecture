@@ -46,9 +46,27 @@ STL(Standard Template Library)是 C++ 标准库的一部分，提供了一系列
 
 ---
 
+### std::array
+
+与c-style的数组类似，但拥有原生的范围检查与不会退化的.size()函数
+
+```cpp
+std::array<int, 10> arr;
+arr[0] = 1;
+arr[1] = 2;
+int a = arr.front();
+int b = arr.back();
+arr.fill(0);
+```
+
+[Reference](https://en.cppreference.com/w/cpp/container/array)
+
+---
+
 ### vector
 
-在已知元素个数的情况下，在构造函数中显示指定容器大小可以提高效率。
+可动态调整大小的数组，支持插入等操作。
+> 在已知元素个数的情况下，在构造函数中显示指定容器大小可以提高效率。
 
 ```cpp
 std::vector<int> v(10);
@@ -63,7 +81,7 @@ v.clear();
 
 ### deque
 
-deque 是双端队列，支持首尾插入删除，相比 vector 在首尾插入删除的开销更低。
+双端队列，支持首尾插入删除，相比 vector 在首尾插入删除的开销更低。[什么是队列(queue)](https://en.oi-wiki.org/ds/queue/)
 
 ```cpp
 std::deque<int> d;
@@ -79,7 +97,7 @@ d.pop_front();
 
 ### 链表
 
-[Introduction](https://oi-wiki.org/ds/linked-list/)
+关于链表的概念：[Introduction](https://oi-wiki.org/ds/linked-list/)
 
 - `forward_list`: 只能正向便利
 - `list`: 可以正向和反向遍历
@@ -111,7 +129,9 @@ std::priority_queue<int, std::deque<int>, std::greater<int>> pq;
 - `set`: [https://oi-wiki.org/ds/rbtree/](https://oi-wiki.org/ds/rbtree/)
 - `map`: [https://oi-wiki.org/ds/rbtree/](https://oi-wiki.org/ds/rbtree/)
 
-#### set
+<br></br>
+
+#### **set**
 
 set 存储了一组已排序的元素，支持插入、删除、查找操作，时间复杂度 O(logn)。
 
@@ -197,6 +217,86 @@ std::endl(std::cout);
 ### Variant(C++17)
 
 C++ 17 加入了 `std::variant`作为类型安全的 union。提供了读取时的类型检查，
+
+```cpp
+std::variant<int, double, std::string> v;
+v = 42;
+v = 3.14;
+v = "Hello, World!";
+std::cout << std::get<std::string>(v) << std::endl;
+
+auto visitor = [](const auto& value) {
+    std::cout << "Value: " << value << std::endl;
+};
+
+std::visit(visitor, v); // 无需类型检查的函数调用
+```
+
+---
+
+### std::any(C++17)
+
+更加安全的void*指针, 且不需要手动管理内存。
+- std::any能够代表任意类型的变量，但访问时需要使用`std::any_cast`进行显式类型转换。
+- `std::any_cast`: 显式转换std::any，转换失败抛出std::bad_any_cast异常。
+
+```cpp
+
+std::any a;
+a = 42;
+a = 3.14;
+a = std::string("Hello, World!");
+
+if (a.has_value()) {
+    try {
+        std::cout << std::any_cast<std::string>(a) << std::endl;
+    } catch (const std::bad_any_cast& e) {
+        std::cout << "类型转换失败: " << e.what() << std::endl;
+    }
+}
+
+// 离开作用域std::any会被自动销毁，不需要手动delete
+```
+
+---
+
+### std::optional
+
+表示可能不存在的值，一般用做函数的返回值
+
+```cpp
+{
+    std::optional<int> foo()
+    {
+        if (...) {
+          return 0;
+        } else {
+          return {}; // return an empty std::optional<int>
+        }
+    }
+    std::optional maybe_value = foo(1, 2);
+    if (maybe_balue.has_balue()) {}
+    ...
+}
+```
+---
+
+### std::function
+
+类型安全的函数对象。
+
+```cpp
+std::function<int(int, int)> add = [](int a, int b) {
+    return a + b;
+};
+
+int result = add(3, 4);
+std::cout << "Result: " << result << std::endl;
+```
+
+- 相比起函数指针，std::function被调用时其函数签名会被检查。
+
+
 
 ---
 layout: iframe 
