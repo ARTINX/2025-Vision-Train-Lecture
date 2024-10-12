@@ -378,9 +378,10 @@ double randomReal = realDist(gen);
 ```
 
 ---
-layout: iframe 
-url: https://blog.vollate.top/2023/12/08/compile-knowledge/#gcc-clang-%E4%BD%BF%E7%94%A8
----
+
+## 命令行编译
+
+[https://blog.vollate.top/2023/12/08/compile-knowledge/#gcc-clang-%E4%BD%BF%E7%94%A8](https://blog.vollate.top/2023/12/08/compile-knowledge/#gcc-clang-%E4%BD%BF%E7%94%A8)
 
 ---
 
