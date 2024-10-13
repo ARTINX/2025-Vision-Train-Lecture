@@ -278,7 +278,7 @@ std::optional<int> foo() {
 std::optional opt = foo(1, 2);
 if (opt.has_value()) {}
 
-if (!opt){ // equal to `opt.has_value()`
+if (opt){ // equal to `if(opt.has_value())`
   std::cout<<"No value"<<std::endl;
 }
 ```
@@ -378,30 +378,21 @@ double randomReal = realDist(gen);
 ```
 
 ---
+layout: iframe 
+url: https://blog.vollate.top/2023/12/08/compile-knowledge/#gcc-clang-%E4%BD%BF%E7%94%A8
+---
 
 ## 命令行编译
 
-[https://blog.vollate.top/2023/12/08/compile-knowledge/#gcc-clang-%E4%BD%BF%E7%94%A8](https://blog.vollate.top/2023/12/08/compile-knowledge/#gcc-clang-%E4%BD%BF%E7%94%A8)
-
 ---
-
-## 构建系统的演进
-
-1. **手工编译 (1950s - 1960s)**  
-2. **批处理脚本 (1960s - 1970s)**： 使用批处理脚本或 shell 脚本自动化编译命令，减少了手工输入。
-3. **Make 系统 (1970s)**： `Make` 引入了增量编译的概念，只重新编译修改过的文件，大幅提升效率。
-4. **配置和生成工具 (1980s - 1990s)**： Autotools 等工具通过自动生成跨平台的构建脚本，支持多平台开发。
-5. **现代构建系统 (2000s - 2010s)**： CMake 和 Meson 等工具采用声明式语法，简化了复杂项目的构建过程。
-6. **专用构建系统和构建工具链 (2010s - Present)**： Gradle、Bazel、Buck 等专注于加速大型项目的构建，提供高度的自定义功能。
-7. **云原生和分布式构建 (2010s - Now)**： 支持云原生和分布式开发场景的构建系统，集成了容器化和 CI/CD 工具。
-
-在 Unix like 系统上，make 是常见的构建系统。但是对于大型项目，手写 makefile 过于复杂且难以维护。同时 make 并没有跨平台支持，无法在Windows平台运行。
+layout: iframe
+url: https://blog.vollate.top/2024/10/12/cmake-introduction
 ---
 
 ## CMake
 
-CMake 是一个元构建系统(meta build system)，可以为不同平台生成不同的构建文件, 如 make，ninja，vs项目等。
-
-CMake 是一个声明式构建系统，通过读取 CMakeList.txt 配置文件来构建项目。
-
 ---
+layout: end
+---
+
+## Q&A
