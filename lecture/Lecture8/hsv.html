@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HSV颜色展示</title>
+    <style>
+        #color-display {
+            width: 300px;
+            height: 300px;
+            margin-bottom: 20px;
+        }
+        #controls input {
+            width: 300px;
+        }
+        #controls label {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="color-display"></canvas>
+    <div id="controls">
+        <label>色相 (Hue): <input type="range" id="hue" min="0" max="360" value="0"></label>
+        <label>饱和度 (Saturation): <input type="range" id="saturation" min="0" max="100" value="100"></label>
+        <label>明度 (Value): <input type="range" id="value" min="0" max="100" value="100"></label>
+    </div>
+    <script>
+        function hsvToRgb(h, s, v) {
+            let r, g, b;
+            h /= 360;
+            s /= 100;
+            v /= 100;
+            let i = Math.floor(h * 6);
+            let f = h * 6 - i;
+            let p = v * (1 - s);
+            let q = v * (1 - f * s);
+            let t = v * (1 - (1 - f) * s);
+            switch (i % 6) {
+                case 0: r = v; g = t; b = p; break;
+                case 1: r = q; g = v; b = p; break;
+                case 2: r = p; g = v; b = t; break;
+                case 3: r = p; g = q; b = v; break;
+                case 4: r = t; g = p; b = v; break;
+                case 5: r = v; g = p; b = q; break;
+            }
+            return {
+                r: Math.round(r * 255),
+                g: Math.round(g * 255),
+                b: Math.round(b * 255)
+            };
+        }
+
+        const canvas = document.getElementById('color-display');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 300;
+        canvas.height = 300;
+
+        const hueInput = document.getElementById('hue');
+        const saturationInput = document.getElementById('saturation');
+        const valueInput = document.getElementById('value');
+
+        function drawColor() {
+            const h = parseFloat(hueInput.value);
+            const s = parseFloat(saturationInput.value);
+            const v = parseFloat(valueInput.value);
+            const rgb = hsvToRgb(h, s, v);
+            ctx.fillStyle = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        hueInput.addEventListener('input', drawColor);
+        saturationInput.addEventListener('input', drawColor);
+        valueInput.addEventListener('input', drawColor);
+
+        drawColor();
+    </script>
+</body>
+</html>
