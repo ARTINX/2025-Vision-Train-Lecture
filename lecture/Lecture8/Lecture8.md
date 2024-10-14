@@ -18,11 +18,29 @@ level: 1
 
 ---
 level: 1
+layout: two-cols
 ---
 
-## Content
+## Introduction: 自动瞄准系统构成
 
-<Toc minDepth="2" maxDepth="2"></Toc>
+<br></br>
+
+### Part 1: 识别目标
+
+<br></br>
+
+### Part 2: 运动状态估计
+
+<br></br>
+
+### Part 3: 击打规划
+
+
+---
+layout: cover
+---
+
+# 数字图像处理
 
 ---
 layout: two-cols-header
@@ -109,10 +127,50 @@ $$
 
 - **闭运算:** 先膨胀后腐蚀
 
+---
+layout: cover
+---
+
+# Introduction to Deep Learning
+
+---
+layout: two-cols
+---
+
+## 多层感知器: 神经元
+
+  <br></br>
+
+- 输入层：接受输入信号
+- 权重： 每个输入信号的权重
+- 激活函数： 将输入信号的加权和转换为输出信号
+
+**正向传播：**
+
+$$
+output = w_1 * x_1 + w_2 * x_2 + w_3 * x_3 + w_4
+$$
+
+**反向传播：**
+
+$$
+\frac{\partial E}{\partial w_{1,j}} = \frac{\partial E}{\partial output} * \frac{\partial output}{\partial w_{1,j}}
+$$
+
+::right::
+
+<br></br>
+
+<br></br>
+
+<img src="./img/mlp.png" alt="hsv space" width="700" />
 
 ---
 
 ## 多层感知器
+
+<img src="./img/mlp_2.png" alt="hsv space" width="700" />
+
 
 ---
 
@@ -122,4 +180,9 @@ $$
 
 ## YOLO(You Only Look Once)
 
+---
+layout: cover
+---
+
+# Project Preview
 
