@@ -141,6 +141,8 @@ layout: two-cols
 
   <br></br>
 
+可用于拟合一些
+
 - 输入层：接受输入信号
 - 权重： 每个输入信号的权重
 - 激活函数： 将输入信号的加权和转换为输出信号
@@ -166,19 +168,81 @@ $$
 <img src="./img/mlp.png" alt="hsv space" width="700" />
 
 ---
+layout: two-cols
+---
+
 
 ## 多层感知器
 
-<img src="./img/mlp_2.png" alt="hsv space" width="700" />
+
+由多层神经元组成的结构
+
+- 拟合函数
+
+- 激活函数引入非线性项
+
+
+::right::
+<img src="./img/mlp_3.png" alt="hsv space" width="700" />
 
 
 ---
+layout: two-cols-header
+---
 
-## 特征提取&卷积神经网络
+## 图像的特征&卷积神经网络
 
+**特征**: 描述图像某个区域的某种属性。直接对图像处理计算量过大时，通常会使用一些特征提取算法提取出特征，来减少运算量，去除不必要的数据。
+
+
+**Example:** HOG(Histogram of oriented gradients) 定向梯度直方图
+
+::left::
+
+<img src="./img/hog.png" alt="hsv space" width="500" />
+
+::right::
+
+<img src="./img/hog_2.png" alt="hsv space" width="500" />
+
+---
+
+### 卷积神经网络
+
+
+卷积核为可学习的参数
+
+<img src="./img/cnn.png" alt="hsv space" width="800" />
+
+---
+layout: two-cols-header
 ---
 
 ## YOLO(You Only Look Once)
+
+YOLO是一种单阶段、快速的深度学习目标检测模型。在十余年的发展中，YOLO进化出了许多版本。
+
+这里以YOLOv1举例。
+
+队内目前使用的装甲板识别模型基于yolov5更改得来。
+
+::left::
+
+1. 使用CNN对图像进行处理，将原图像转化为7 * 7 * 1024的特征图
+
+2. 将此特征图放入mlp，运算得到7 * 7 * 30的结果向量, 包含2组物体的信息(中心点位置，宽高，类别概率)
+
+3. 损失函数为结果向量的最后一个维度与对应图像区域标签之差
+
+> 一个可行的理解是，YOLO将图像特征提取后，用一个1024 - 30的mlp拟合了 **特征向量-物体信息** 的 函数。
+> 
+> 但注意, 实际上，YOLO是将7 * 7 * 1024的特征图拉开为了一个50176维的向量，放入两层感知器后得到一个
+1470维的结果向量，再进行拆分，得到7 * 7 * 30的矩阵。
+
+::right::
+
+<img src="./img/yolo.png" alt="hsv space" width="450" />
+
 
 ---
 layout: cover
