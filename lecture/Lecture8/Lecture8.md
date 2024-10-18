@@ -17,6 +17,10 @@ level: 1
 # Lecture 8
 
 ---
+
+<img src="./img/sign.png" alt="hsv space" width="600" />
+
+---
 level: 1
 layout: two-cols
 ---
