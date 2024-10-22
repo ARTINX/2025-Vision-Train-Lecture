@@ -234,10 +234,10 @@ layout: two-cols
 - **状态转移模型** ($\mathbf{F}_k$)：描述系统状态如何从时刻 $k-1$ 变化到时刻 $k$。
 ::right::
 $$
-\mathbf{x}_k = \mathbf{F}_k \mathbf{x}_{k-1} + \mathbf{B}_k \mathbf{u}_k + \mathbf{w}_k
+\mathbf{x}_k = \mathbf{F}_k \mathbf{x}_{k-1} + \mathbf{w}_k
 $$
 
-其中，$\mathbf{F}_k$ 是状态转移矩阵，表示从 $k-1$ 到 $k$ 的状态变化。$\mathbf{u}_k$ 是控制输入，$\mathbf{w}_k$ 是过程噪声，假设其均值为零，协方差为 $\mathbf{Q}_k$。
+其中，$\mathbf{F}_k$ 是状态转移矩阵，表示从 $k-1$ 到 $k$ 的状态变化。$\mathbf{w}_k$ 是过程噪声，假设其均值为零，协方差为 $\mathbf{Q}_k$。
 
 - **观测模型** ($\mathbf{H}_k$)：描述如何从状态估计得到观测值。
 
@@ -263,12 +263,11 @@ layout: two-cols
 
 **状态预测公式：**
 $$
-\mathbf{\hat{x}}_k^- = \mathbf{F}_k \mathbf{\hat{x}}_{k-1} + \mathbf{B}_k \mathbf{u}_k
+\mathbf{\hat{x}}_k^- = \mathbf{F}_k \mathbf{\hat{x}}_{k-1}
 $$
 
 - $\mathbf{\hat{x}}_k^-$ 是预测的状态估计值（先验估计）。
 - $\mathbf{F}_k$ 是状态转移矩阵，表示从 $k-1$ 到 $k$ 的状态变化。
-- $\mathbf{B}_k \mathbf{u}_k$ 是控制输入对状态的影响。
 ::right::
 **协方差预测公式：**
 $$
@@ -314,11 +313,12 @@ $$
 ### 卡尔曼滤波流程总结
 
 1. **预测阶段**：
-   - 预测状态：$\mathbf{\hat{x}}_k^- = \mathbf{F}_k \mathbf{\hat{x}}_{k-1} + \mathbf{B}_k \mathbf{u}_k$
+   - 预测状态：$\mathbf{\hat{x}}_k^- = \mathbf{F}_k \mathbf{\hat{x}}_{k-1}$
    - 预测协方差：$\mathbf{P}_k^- = \mathbf{F}_k \mathbf{P}_{k-1} \mathbf{F}_k^T + \mathbf{Q}_k$
 
 2. **更新阶段**：
-   - 计算卡尔曼增益：$\mathbf{K}_k = \mathbf{P}_k^- \mathbf{H}_k^T \left( \mathbf{H}_k \mathbf{P}_k^- \mathbf{H}_k^T + \mathbf{R}_k \right)^{-1}$
+   - 计算卡尔曼增益：
+   - $\mathbf{K}_k = \mathbf{P}_k^- \mathbf{H}_k^T \left( \mathbf{H}_k \mathbf{P}_k^- \mathbf{H}_k^T + \mathbf{R}_k \right)^{-1}$
    - 更新状态估计：$\mathbf{\hat{x}}_k = \mathbf{\hat{x}}_k^- + \mathbf{K}_k \left( \mathbf{z}_k - \mathbf{H}_k \mathbf{\hat{x}}_k^- \right)$
    - 更新协方差估计：$\mathbf{P}_k = \left( \mathbf{I} - \mathbf{K}_k \mathbf{H}_k \right) \mathbf{P}_k^-$
 
@@ -338,10 +338,9 @@ $x,y$ :  $x$ 和 $y$ 方向的位置
 
 $\dot{x},\dot{y}$ ：$x$ 和 $y$ 方向的速度
 
-$\ddot{x},\ddot{y}$ ：$x$ 和 $y$ 方向的加速度
-<img src="./img/image5.png" width="100%">
+<img src="./img/image5.png" width="70%">
 ::right::
-<img src="./img/image6.png" width="130%">
+<img src="./img/image6.png" width="80%">
 ---
 layout: two-cols
 ---
