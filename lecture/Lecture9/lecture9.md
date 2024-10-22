@@ -135,11 +135,10 @@ layout: two-cols
 
 <br></br>
 
-- Example: 绕 $x$、$y$、$z$ 轴的旋转矩阵分别为：
-
+2维平面的坐标系旋转$\theta$度示例： 
 <img src="./img/rotation01.png" width="80%">
 ::right::
-
+- Example: 绕 $x$、$y$、$z$ 轴的三维旋转矩阵分别为：
 <br></br>
 
 <img src="./img/image copy.png" width="80%">
