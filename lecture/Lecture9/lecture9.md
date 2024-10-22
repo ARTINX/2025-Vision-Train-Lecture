@@ -31,13 +31,68 @@ BanGVision! It's MyCode!!!!!
 镜头靶面尺寸应该至少不小于传感器的尺寸。
 
 ---
-
-## 相机标定
-
 ---
+## 相机标定
+cv::calibrateCamera 是 OpenCV 中用于相机标定的函数，主要用于计算相机内参矩阵和畸变系数。
+```c++
+double cv::calibrateCamera(
+    const std::vector<std::vector<cv::Point3f>>& objectPoints,
+    const std::vector<std::vector<cv::Point2f>>& imagePoints,
+    cv::Size imageSize,
+    cv::Mat& cameraMatrix,
+    cv::Mat& distCoeffs,
+    std::vector<cv::Mat>& rvecs,
+    std::vector<cv::Mat>& tvecs,
+    int flags = 0,
+    cv::TermCriteria criteria = cv::TermCriteria(cv::TermCriteria::EPS + cv::TermCriteria::COUNT, 30, DBL_EPSILON)
+);
+```
+objectPoints: 3D点的集合，通常是世界坐标系中的物体点   
 
+imagePoints: 2D点的集合，对应于图像中检测到的物体点。
+
+imageSize: 输入图像的尺寸（宽度和高度）  
+
+cameraMatrix: 输出参数，表示相机内参矩阵。     distCoeffs: 输出参数，表示相机的畸变系数。
+
+rvecs: 输出参数，旋转向量（相机相对于世界坐标系的旋转）。 tvecs: 输出参数，平移向量。
+
+flags:可选标志，控制算法的行为。criteria:终止条件，指定优化的精度和迭代次数。类型为 cv::TermCriteria
+---
+layout: two-cols
+---
 ## pnp解算
+pnp 算法通过建立器相机像素平面上特征点的**2D信息**和实际物体这些特征点的**3D**坐标信息，完成了目标坐标系和相机坐标系之间的**位置**和**姿态**解算
+<img src="./img/pnp.png" width="70%">
+::right::
 
+```c++
+bool cv::solvePnP(
+    const std::vector<cv::Point3f>& objectPoints,
+    const std::vector<cv::Point2f>& imagePoints,
+    const cv::Mat& cameraMatrix,
+    const cv::Mat& distCoeffs,
+    cv::Mat& rvec,
+    cv::Mat& tvec,
+    bool useExtrinsicGuess = false,
+    int flags = cv::SOLVEPNP_ITERATIVE
+);
+```
+objectPoints: 3D点的集合，表示物体在空间中的位置。
+
+imagePoints: 对应的2D点集合，表示在图像中的位置。
+
+cameraMatrix: 相机内参矩阵，包含焦距和主点信息。
+
+distCoeffs: 相机畸变系数，描述镜头的畸变情况。
+
+rvec: 输出参数，表示相机的旋转向量。
+
+tvec: 输出参数，表示相机的平移向量。
+
+useExtrinsicGuess: 是否使用外部猜测值。
+
+flags: 控制算法行为的标志，默认为迭代法。
 ---
 layout: two-cols
 ---
@@ -82,6 +137,7 @@ layout: two-cols
 
 - Example: 绕 $x$、$y$、$z$ 轴的旋转矩阵分别为：
 
+<img src="./img/rotation01.png" width="80%">
 ::right::
 
 <br></br>
@@ -125,10 +181,6 @@ layout: two-cols
 ### (1)装甲板坐标系到相机坐标系
 在实际的装甲板检测中，可以通过**pnp**算法得到 装甲板坐标系想对于相机坐标系的 **平移向量**$(t_{vec})$ 和 **旋转向量** $r_{vec}$ 。 
 
-pnp 算法通过建立器相机像素平面上特征点的**2D信息**和实际物体这些特征点的**3D**坐标信息，完成了目标坐标系和相机坐标系之间的**位置**和**姿态**解算
-<img src="./img/pnp.png" width="70%">
-
-pnp具体使用参考：[OpenCV: Perspective-n-Point (PnP) pose computation](https://docs.opencv.org/3.4/d5/d1f/calib3d_solvePnP.html)
 ---
 layout: two-cols
 ---
@@ -161,7 +213,9 @@ layout: two-cols
 
 结合上述两个坐标系变换可以得到：
 $$
-^A_RT = ^A_CT \times ^C_R T \\
+^A_RT = ^A_CT \times ^C_R T 
+$$
+$$
 ^R_AT = [^A_RT]^{-1}
 $$
 
@@ -332,7 +386,7 @@ $$\begin{gathered}\mathbf{Q}=\begin{bmatrix}\frac{\Delta t^4}{4}&0&\frac{\Delta 
 ::right::
 ### 测量噪声协方差矩阵 $R$
 
-同理，测量噪声协方差R可表示为：
+同,测量噪声协方差R可表示为:
 
 $$\begin{gathered}\quad \quad \quad x \quad  y \\\mathbf{R}=\begin{array}{c}x\\y\\\end{array}\begin{bmatrix}\sigma_x^2&0\\0&\sigma_{{y}}^2\end{bmatrix}\end{gathered}$$ 
 
@@ -345,7 +399,7 @@ layout: two-cols
 
 此时需要采用**拓展卡尔曼**进行建模，同时使用**雅可比矩阵**来描述变量间的关系，但是本质思想不变。
 
-EKF步骤如下：
+EKF步骤如下:
 
 (1)状态预测：利用非线性系统的状态方程进行预测。
 
