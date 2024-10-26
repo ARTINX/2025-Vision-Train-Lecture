@@ -14,7 +14,7 @@ mdc: true
 level: 1
 ---
 
-# Lecture 9
+# Lecture 10
 BanGVision! It's My?????
 
 ---
