@@ -11,7 +11,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           submodules: true   
@@ -20,10 +20,6 @@ jobs:
       - uses: pnpm/action-setup@v4
         with:
           version: 8
-
-      - name: Install Chinese fonts
-        run: |
-            sudo apt-get install -y fonts-noto-cjk
             
       - name: Use Node.js 20.x
         uses: actions/setup-node@v4
@@ -41,7 +37,7 @@ jobs:
           node script/build.cjs
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public

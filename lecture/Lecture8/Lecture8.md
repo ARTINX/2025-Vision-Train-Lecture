@@ -12,6 +12,10 @@ transition: slide-left
 class: text-center
 mdc: true
 level: 1
+fonts:
+  sans: Noto Sans SC
+  serif: Noto Serif SC
+  mono: JetBrains Mono
 ---
 
 # Lecture 8
