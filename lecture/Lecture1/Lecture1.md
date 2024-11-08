@@ -6,6 +6,10 @@ transition: slide-left
 level: 1
 layout: cover
 download: true
+fonts:
+  sans: Noto Sans SC
+  serif: Noto Serif SC
+  mono: JetBrains Mono
 ---
 
 
