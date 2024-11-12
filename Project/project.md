@@ -4,7 +4,7 @@
 
 ## 1.项目概述
 
-在本次作业中，你需要设计并且完成一个装甲板的识别（已经在assignment3中完成，如果你们真的完成了的话qwq），定位和运动学预测解算的系统建模，并且通过相机标定对于实际平动机器人进行实际的效果检验。
+在本次作业中，你需要设计并且完成一个装甲板的识别（已经在assignment3中完成，如果你们真的完成了的话qwq），定位和运动学预测解算的系统建模，并且通过标定后的相机对于实际平动装甲板进行实际的效果检验。
 
 各个任务的队内代码实现版本可以在[Gitlab](https://mirrors.sustech.edu.cn/git/ARTINX/artinx-hub)中找到。请注意实现的具体内容可能与本次proj有区别。
 
@@ -102,7 +102,9 @@ bool cv::solvePnP(
 
 ## 5. 运动学建模(CarPredictor)
 
-### Ref: src/PostProcess/CarPredictor.cpp
+### Ref： src/Utility/EKF.cpp
+
+### Ref：src/PostProcess/CarPredictor.cpp
 
 运动学建模基于卡尔曼滤波相关知识，具体参考`lecture9` 中的卡尔曼滤波的实现部分。
 
