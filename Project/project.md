@@ -144,3 +144,4 @@ bool cv::solvePnP(
 
 - 将代码打包成一个 zip 文件，文件名格式为：`姓名-学号-Project.zip`。
 - 将文件发送至邮箱：`submit@vollate.top`，邮件标题为：`ARTINX2025视觉Project`
+- 截止日期：2024年12月6日23:59
