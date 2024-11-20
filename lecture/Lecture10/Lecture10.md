@@ -63,7 +63,8 @@ layout: two-cols
 <img src="./img/factory-method.png" width="80%">
 ::right::
 
-### 1.4 守护进程中的 Daemon: (/src/Daemon.cpp)
+### 1.4 守护进程中的 Daemon: 
+(/src/Daemon.cpp)
 Daemon 仅在主进程中创建的 Actor 中守护，保证 Actor 的生命周期与主进程一致，适用于需要持续运行的服务进程。
 
 Daemon 是主进程内的一个特殊 Actor，它会在主进程退出时自动停止。
@@ -77,7 +78,7 @@ layout: two-cols
 ---
 ## 1.CAF框架讲解
 ### 1.5 程序工作流程 
-详见(/include/Hub.hpp src/HubMain.cpp)
+(/include/Hub.hpp src/HubMain.cpp deploy_config)
 - CAF框架读取caf-application.conf初始化并进入caf_main
 - caf_main根据argv[1]读取conf文件并解析
 - 根据配置文件通过工厂模式初始化各actor，并将actor的地址收集到map里用于通讯
@@ -200,8 +201,93 @@ visualLog：用于将视觉系统的日志输出到文件，适合在视觉处�
 layout: two-cols
 ---
 
-# 如何开始一个新项目
+## 4.如何开始一个新项目
+### 4.1 定义你的Actor
+确定你所需要的节点Actor,扮演怎样的功能，与其他节点的关系，接受和发送怎样的消息类型atom, 一般根据功能写在/src中的具体的目录下。
 
+**keyPoint**
+
+(1) `inspect` 初始化
+CAF 是一个消息驱动的框架，actor 之间通过消息传递进行通信。inspect 函数使自定义类型能够被序列化，以便作为消息内容在不同 actor 之间传递。
+
+（2）定义你的Actor
+继承的事件类型，caf 初始化的基本数据，依赖的atom(协议)
+```cpp
+class ArmorDetector final
+    : public HubHelper<caf::event_based_actor, 
+    ArmorDetectorSettings,
+    armor_detect_available_atom, image_frame_atom>
+```
+::right::
+
+(3) 完成构造函数
+```cpp
+ArmorDetector(caf::actor_config& base, const HubConfig& config, std::string name)
+   : HubHelper{ base, config, std::move(name) }, 
+   mKey{ generateKey(this) } {
+   mNumClassifierPtr = std::make_unique<NumberClassifier>(mConfig.numClassifyModelPath);
+}
+```
+继承了 HubHelper 类，并通过 base, config, name 初始化其基类。
+
+使用 generateKey(this) 为当前对象生成一个唯一标识符 mKey，用于标识或管理 actor 的状态或数据。
+
+创建 NumberClassifier 的实例，加载配置中指定路径的模型（mConfig.numClassifyModelPath）。
 ---
 layout: two-cols
 ---
+
+## 4.如何开始一个新项目
+(3) 构造函数  `make_behavior` function
+#### 启动处理
+`[](start_atom)`：用于初始化或启动逻辑。
+
+ACTOR_PROTOCOL_CHECK 用于校验消息协议。
+#### 接收消息atom
+```cpp
+[&](image_frame_atom, Identifier key)
+```
+
+#### 发送消息atom
+```cpp
+sendAll(armor_detect_available_atom_v, 
+BlackBoard::instance().updateSync(mKey, std::move(res)));
+```
+::right::
+#### 注册HUB
+```cpp
+HUB_REGISTER_CLASS(ArmorDetector);
+```
+
+#### CMakeList.txt
+添加到src的CMakeList.txt 的SOURCE 变量中
+---
+layout: two-cols
+---
+
+### 4.2 定义你的atom
+atom 定义了消息传递的数据类型，写在/include 目录下。
+(1) 定义消息类型
+一般通过定义struct 来存储需要传递的信息。
+```cpp
+struct DetectedArmorArray final {
+    CameraFrame frame;
+    std::vector<Armor> armors;
+};
+```
+
+(2) 定义协议
+```cpp
+ACTOR_PROTOCOL_DEFINE(atom_name, parameter_type);
+ACTOR_PROTOCOL_DEFINE(armor_detect_available_atom,
+TypedIdentifier<DetectedArmorArray>);
+```
+(3) 添加atom 到 HUB
+在/include/DataDesc.hpp 中添加atom
+
+```cpp
+CAF_ADD_ATOM(ArtinxHub, armor_detect_available_atom)
+```
+::right::
+### 4.3 更新你的配置文件
+在.conf 文件中添加节点信息
