@@ -35,7 +35,7 @@ layout: two-cols
 ---
 
 ## 1.CAF框架讲解
-### 1.1 Actor 模型
+### 1.1 Actor 模型以及CAF 框架
 Actor 模型是一种并发计算模型，其中每个 Actor 都是一个计算单元，能够执行以下操作：
 
 发送消息：Actor 之间通过消息进行通信,异步发送的。\
@@ -44,27 +44,26 @@ Actor 模型是一种并发计算模型，其中每个 Actor 都是一个计算�
 
 每个 Actor 拥有独立的状态，而不同 Actor 之间无法直接访问状态，这种模型极大地减少了多线程编程中常见的数据竞争问题。
 
+CAF 框架基于 Actor 模型设计,可以通过 Actor System 来管理 Actor 的生命周期、消息传递和调度等功能，允许创建、管理和销毁 Actor。
 ::right::
+### 1.2 工厂模式
+工厂模式是一种创建型设计模式，主要用于封装对象的创建逻辑。
 
-### 1.2 CAF 框架
-CAF 框架基于 Actor 模型设计，核心包含以下部分：
+它通过定义一个接口或抽象类，允许子类决定实例化的具体类型，从而实现对象的创建和管理。
 
-Actor System：管理 Actor 的生命周期、消息传递和调度等功能，允许创建、管理和销毁 Actor。\
-Message Passing：通过异步消息传递机制，确保消息从一个 Actor 的输出队列传递到目标 Actor 的输入队列。\
-Schedulers：提供多种调度器，将任务分配到 CPU 核心。\
-分布式 Actor 系统 
+工厂模式的核心思想是将对象的创建与使用分离。
+
+<img src="./img/factory-method.png" width="80%">
+
 ---
 layout: two-cols
 ---
 ## 1.CAF框架讲解
-### 1.3 工厂模式
-工厂模式是一种创建型设计模式，主要用于封装对象的创建逻辑。它通过定义一个接口或抽象类，允许子类决定实例化的具体类型，从而实现对象的创建和管理。工厂模式的核心思想是将对象的创建与使用分离，提供灵活的扩展性和可维护性。
 
-<img src="./img/factory-method.png" width="80%">
-::right::
+### 1.3 守护进程（Daemon）: 
 
-### 1.4 守护进程中的 Daemon: 
 (/src/Daemon.cpp)
+
 Daemon 仅在主进程中创建的 Actor 中守护，保证 Actor 的生命周期与主进程一致，适用于需要持续运行的服务进程。
 
 Daemon 是主进程内的一个特殊 Actor，它会在主进程退出时自动停止。
@@ -73,12 +72,10 @@ Daemon 是主进程内的一个特殊 Actor，它会在主进程退出时自动�
 长期运行的后台服务：如日志收集器、资源监控器。
 
 必须依赖主进程生命周期的功能模块：如数据库连接池管理器。
----
-layout: two-cols
----
-## 1.CAF框架讲解
-### 1.5 程序工作流程 
+::right::
+### 1.4 程序工作流程 
 (/include/Hub.hpp src/HubMain.cpp deploy_config)
+
 - CAF框架读取caf-application.conf初始化并进入caf_main
 - caf_main根据argv[1]读取conf文件并解析
 - 根据配置文件通过工厂模式初始化各actor，并将actor的地址收集到map里用于通讯
@@ -117,7 +114,7 @@ layout: two-cols
 ### 2.2 some about CMakeLists.txt
 (1) src
 
-(2) project
+(2) root 
 ---
 layout: two-cols
 ---
@@ -126,20 +123,21 @@ layout: two-cols
 (ArmorDetector.cpp为例)
 ### 3.1 Actor 信息发送
 在 CAF 中，消息传递是通过 sendAll 函数来实现异步传递以及高效并发。
-#### 使用 sendAll 函数发送信息: 
-sendAll 的第一个参数必须为 atom 类型，用于标识消息类型。atom 是一种在 `DataDesc.hpp` 文件中定义的特殊数据类型，用于标识不同消息的类型。
+sendAll 的第一个参数必须为 atom 类型，用于标识消息类型。
+
+atom 是一种在 `DataDesc.hpp` 文件中定义的特殊数据类型，用于标识不同消息的类型。
 #### 自定义参数传递：
-在 sendAll 函数的第一个 atom 参数后，可以自定义任意数量的参数，用于传递消息的内容。这些参数需要与发送方和接收方的定义一致，以确保消息能够被正确处理。
+在 sendAll 函数的第一个 atom 参数后，可以自定义任意数量的参数，用于传递消息的内容。
 ::right::
 #### 大结构体传递：
-对于大型数据结构，建议通过 BlackBoard 系统进行传递,以减少消息传输的负担。BlackBoard 系统中使用 get 和 updateSync 等函数来读取或更新数据。
+对于大型数据结构，建议通过 BlackBoard 系统进行传递,以减少消息传输的负担。
+
+BlackBoard 系统中使用 get 和 updateSync 等函数来读取或更新数据。
+
 updateSync 函数的第二个参数需设置为 Identifier，用于标识数据的类型，通常是数据结构类型的 hashcode 值。
 
 #### atom 类型的注册：
-所有输出的 atom 类型必须在 HubHelper 类的模板参数中进行注册，一致同一的格式为,具体可见`DataDesc.hpp`。
-```c++
-HubHelper<Actor 类型, Settings 类型 (可设为 void), send atom 类型...>
-```
+所有输出的 atom 类型必须在 HubHelper 类的模板参数中进行注册,具体可见`DataDesc.hpp`。
 ---
 layout: two-cols
 ---
@@ -150,9 +148,8 @@ Actor 的初始化过程决定了每个 Actor 的生命周期和状态的设定�
 所有 Actor 初始化完成后会收到一条 start_atom 消息。通过这条消息，开发者可以确保 Actor 已就绪，且可以正常发送消息。
 
 - start_atom 消息：初始化后的第一个消息为 start_atom,可以确保 Actor 已经启动，可以安全地进行消息发送。
-- mConfig 设置: 
-- CAF 框架中，所有 Actor 的 Settings 配置保存在 mConfig 中，可以通过 mConfig 读取 Actor 的配置参数。
-- Settings 的使用:Settings 用于配置 Actor 的初始参数，如网络设置、数据类型和传输协议等，可以在 actor_system_config 中进行配置。
+- mConfig 设置: CAF 框架中，所有 Actor 的 Settings 配置保存在 mConfig 中，可以通过 mConfig 读取 Actor 的配置参数。
+- Settings 的使用: Settings 用于配置 Actor 的初始参数，如网络设置、数据类型和传输协议等，可以在 actor_system_config 中进行配置。
 
 ::right::
 ### 3.3 Acotr分类
@@ -171,19 +168,7 @@ act 函数使用 receive 函数来同步地处理每个消息，适用于需要�
 layout: two-cols
 ---
 ## 3.如何看懂一个ACTOR
-### 3.4 动态模板匹配机制：
-
-CAF 采用动态模板匹配机制，将消息内容分发给相应的处理函数。确保调用方和接收方的接口一致，避免消息参数的类型和数量不匹配。
-
-此机制的实现依赖于 CAF 的类型安全检查和静态编译，因此在编写时需特别注意消息类型的定义。
-
-重启消息和配置文件重载：
-
-重启和配置文件重载功能由基类中的 set_default_handler 实现，避免手动设置该函数。
-在需要重启 Actor 或重新加载配置文件时，可以直接调用此默认处理器，从而避免复杂的错误处理逻辑。
-::right::
-
-### 3.5 调试输出
+### 3.4 调试输出
 CAF 框架提供了多种调试输出方式，调试工具包括 HubLogger 类（caf 中的日志管理类）和不同级别的日志函数，目前的日志输出方式：
 
 watch：输出信息到网页前端，用于实时监控系统状态。
@@ -266,7 +251,8 @@ layout: two-cols
 ---
 
 ### 4.2 定义你的atom
-atom 定义了消息传递的数据类型，写在/include 目录下。
+atom 定义了消息传递的数据类型，一般写在/include 目录下。
+
 (1) 定义消息类型
 一般通过定义struct 来存储需要传递的信息。
 ```cpp
@@ -291,3 +277,13 @@ CAF_ADD_ATOM(ArtinxHub, armor_detect_available_atom)
 ::right::
 ### 4.3 更新你的配置文件
 在.conf 文件中添加节点信息
+---
+layout: default
+---
+## After This
+
+(1) 对于代码框架的结构初步熟悉
+
+(2) 知道如何上手去完成新的功能节点，进行开发
+
+(3) 更多的框架细节未涉及，可以自行查阅理解
