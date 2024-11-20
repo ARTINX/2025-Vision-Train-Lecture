@@ -34,8 +34,8 @@ layout: cover
 layout: two-cols
 ---
 
-# CAF框架讲解
-## Actor 模型
+## 1.CAF框架讲解
+### 1.1 Actor 模型
 Actor 模型是一种并发计算模型，其中每个 Actor 都是一个计算单元，能够执行以下操作：
 
 发送消息：Actor 之间通过消息进行通信,异步发送的。\
@@ -46,7 +46,7 @@ Actor 模型是一种并发计算模型，其中每个 Actor 都是一个计算�
 
 ::right::
 
-## CAF 框架
+### 1.2 CAF 框架
 CAF 框架基于 Actor 模型设计，核心包含以下部分：
 
 Actor System：管理 Actor 的生命周期、消息传递和调度等功能，允许创建、管理和销毁 Actor。\
@@ -56,13 +56,14 @@ Schedulers：提供多种调度器，将任务分配到 CPU 核心。\
 ---
 layout: two-cols
 ---
-## CAF框架讲解
-### 工厂模式
+## 1.CAF框架讲解
+### 1.3 工厂模式
 工厂模式是一种创建型设计模式，主要用于封装对象的创建逻辑。它通过定义一个接口或抽象类，允许子类决定实例化的具体类型，从而实现对象的创建和管理。工厂模式的核心思想是将对象的创建与使用分离，提供灵活的扩展性和可维护性。
 
 <img src="./img/factory-method.png" width="80%">
 ::right::
-### 守护进程中的 Daemon: (/src/Daemon.cpp)
+
+### 1.4 守护进程中的 Daemon: (/src/Daemon.cpp)
 Daemon 仅在主进程中创建的 Actor 中守护，保证 Actor 的生命周期与主进程一致，适用于需要持续运行的服务进程。
 
 Daemon 是主进程内的一个特殊 Actor，它会在主进程退出时自动停止。
@@ -74,8 +75,8 @@ Daemon 是主进程内的一个特殊 Actor，它会在主进程退出时自动�
 ---
 layout: two-cols
 ---
-## CAF框架讲解
-### 程序工作流程 
+## 1.CAF框架讲解
+### 1.5 程序工作流程 
 详见(/include/Hub.hpp src/HubMain.cpp)
 - CAF框架读取caf-application.conf初始化并进入caf_main
 - caf_main根据argv[1]读取conf文件并解析
@@ -85,7 +86,8 @@ layout: two-cols
 ---
 layout: two-cols
 ---
-# 仓库结构
+## 2.仓库结构
+### 2.1 outline
 ```shell
 .
 |-- bringup_templates 自启动/自动部署脚本
@@ -110,24 +112,29 @@ layout: two-cols
 |-- Folder.DotSettings Resharper++ Lint配置文件
 |-- README.md 本文件
 ```
+::right::
+### 2.2 some about CMakeLists.txt
+(1) src
+
+(2) project
 ---
 layout: two-cols
 ---
 
-# 如何看懂一个ACTOR
+## 3.如何看懂一个ACTOR
 (ArmorDetector.cpp为例)
-## Actor 信息发送
+### 3.1 Actor 信息发送
 在 CAF 中，消息传递是通过 sendAll 函数来实现异步传递以及高效并发。
-### 使用 sendAll 函数发送信息: 
+#### 使用 sendAll 函数发送信息: 
 sendAll 的第一个参数必须为 atom 类型，用于标识消息类型。atom 是一种在 `DataDesc.hpp` 文件中定义的特殊数据类型，用于标识不同消息的类型。
-### 自定义参数传递：
+#### 自定义参数传递：
 在 sendAll 函数的第一个 atom 参数后，可以自定义任意数量的参数，用于传递消息的内容。这些参数需要与发送方和接收方的定义一致，以确保消息能够被正确处理。
 ::right::
-### 大结构体传递：
+#### 大结构体传递：
 对于大型数据结构，建议通过 BlackBoard 系统进行传递,以减少消息传输的负担。BlackBoard 系统中使用 get 和 updateSync 等函数来读取或更新数据。
 updateSync 函数的第二个参数需设置为 Identifier，用于标识数据的类型，通常是数据结构类型的 hashcode 值。
 
-### atom 类型的注册：
+#### atom 类型的注册：
 所有输出的 atom 类型必须在 HubHelper 类的模板参数中进行注册，一致同一的格式为,具体可见`DataDesc.hpp`。
 ```c++
 HubHelper<Actor 类型, Settings 类型 (可设为 void), send atom 类型...>
@@ -135,9 +142,9 @@ HubHelper<Actor 类型, Settings 类型 (可设为 void), send atom 类型...>
 ---
 layout: two-cols
 ---
-# 如何看懂一个ACTOR
+## 3.如何看懂一个ACTOR
 
-## Actor 初始化
+### 3.2 Actor 初始化
 Actor 的初始化过程决定了每个 Actor 的生命周期和状态的设定。
 所有 Actor 初始化完成后会收到一条 start_atom 消息。通过这条消息，开发者可以确保 Actor 已就绪，且可以正常发送消息。
 
@@ -147,22 +154,23 @@ Actor 的初始化过程决定了每个 Actor 的生命周期和状态的设定�
 - Settings 的使用:Settings 用于配置 Actor 的初始参数，如网络设置、数据类型和传输协议等，可以在 actor_system_config 中进行配置。
 
 ::right::
-CAF 支持两种主要的 Actor 类型: event_based_actor 和 blocking_actor。
+### 3.3 Acotr分类
+CAF 支持多种的 Actor 类型，代码框架中用到的主要两种：event_based_actor 和 blocking_actor。
 其余的actor类型参考: https://actor-framework.readthedocs.io/en/stable/core/Actors.html
 
-### event_based_actor:
+#### event_based_actor:
 event_based_actor 是基于事件的 Actor 类型，使用 make_behavior 函数来处理消息。
 在 make_behavior 中，定义了该 Actor 所需处理的消息模式和对应的响应动作，通常使用 caf::behavior 和消息匹配的方式实现。
 
-### blocking_actor:
+#### blocking_actor:
 blocking_actor 是基于阻塞模式的 Actor:消息处理通过 act 函数完成。
 act 函数使用 receive 函数来同步地处理每个消息，适用于需要严格控制消息顺序的场景。
 
 ---
 layout: two-cols
 ---
-
-## 动态模板匹配机制：
+## 3.如何看懂一个ACTOR
+### 3.4 动态模板匹配机制：
 
 CAF 采用动态模板匹配机制，将消息内容分发给相应的处理函数。确保调用方和接收方的接口一致，避免消息参数的类型和数量不匹配。
 
@@ -173,14 +181,9 @@ CAF 采用动态模板匹配机制，将消息内容分发给相应的处理函�
 重启和配置文件重载功能由基类中的 set_default_handler 实现，避免手动设置该函数。
 在需要重启 Actor 或重新加载配置文件时，可以直接调用此默认处理器，从而避免复杂的错误处理逻辑。
 ::right::
----
-layout: default
----
-## 如何看懂一个ACTOR
-### 调试输出
-CAF 框架提供了多种调试输出方式，以帮助开发者分析和排查程序运行中的问题。调试工具包括 HubLogger 类和不同级别的日志函数
-HubLogger 类：HubLogger 是 CAF 中的日志管理类，用于输出调试信息。
-目前的日志输出方式：
+
+### 3.5 调试输出
+CAF 框架提供了多种调试输出方式，调试工具包括 HubLogger 类（caf 中的日志管理类）和不同级别的日志函数，目前的日志输出方式：
 
 watch：输出信息到网页前端，用于实时监控系统状态。
 
@@ -192,7 +195,7 @@ electricCtrlLog：用于将电控系统的日志输出到文件，通常用于�
 
 visualLog：用于将视觉系统的日志输出到文件，适合在视觉处理模块中记录中间处理结果或异常情况。
 
-更多关于框架代码细节的介绍可以参考:https://mirrors.sustech.edu.cn/git/artinx/artinx-hub/-/blob/develop/docs/code_details.md
+更多代码细节参考:doc/code_details.md
 ---
 layout: two-cols
 ---
