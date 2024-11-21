@@ -176,7 +176,7 @@ watch：输出信息到网页前端，用于实时监控系统状态。
 logInfo/logWarning/logError：用于在终端无缓冲输出信息，确保不会受到 Hub 内其他输出的干扰，适合用于调试关键信息。
 
 print：功能未详细记录，可根据实际需求进行调试尝试。
-
+::right::
 electricCtrlLog：用于将电控系统的日志输出到文件，通常用于长期保存记录或归档分析。
 
 visualLog：用于将视觉系统的日志输出到文件，适合在视觉处理模块中记录中间处理结果或异常情况。
@@ -193,9 +193,10 @@ layout: two-cols
 **keyPoint**
 
 (1) `inspect` 初始化
+
 CAF 是一个消息驱动的框架，actor 之间通过消息传递进行通信。inspect 函数使自定义类型能够被序列化，以便作为消息内容在不同 actor 之间传递。
 
-（2）定义你的Actor
+(2) 定义你的Actor
 继承的事件类型，caf 初始化的基本数据，依赖的atom(协议)
 ```cpp
 class ArmorDetector final
